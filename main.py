@@ -4,6 +4,8 @@
 import alg
 import data
 import locale
+import latex
+import codecs
 
 def main():
     locale.setlocale(locale.LC_ALL, 'sv_SE')
@@ -24,18 +26,9 @@ def main():
         return
 
     shopping_list = alg.make_shopping_list(data.menu, data.ingredient_types)
-    for cat, ingredients in sorted(alg.order_by_category(shopping_list)):
-        print "**",cat
-        for ingredient in sorted(ingredients):
-            if ingredient.quantity:
-                formatst = "%.1f"
-                print ingredient.name+", " + \
-                    locale.format(formatst,ingredient.quantity.magnitude) + " " +\
-                    alg.translate_unit(unicode(ingredient.quantity.units))
-            else:
-                print ingredient.name
-        print
-
+    with codecs.open("shopping.tex","w","utf-8") as f:
+        latex.shopping_list_to_latex(shopping_list,f)
+        
 if __name__ == "__main__":
     main()
  

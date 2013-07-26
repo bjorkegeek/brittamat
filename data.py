@@ -117,6 +117,16 @@ ingredient_types = NameDict([
     Ingredient(name=u'Quornfiléer',purchase_unit=units.count, category=u"frys"),
     Ingredient(name=u'Sojakorvar, Hälsans kök',purchase_unit=units.count, category=u"frys"),
 
+    Ingredient(name=u'Kaffe',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Diskmedel, flaska',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Rotsaksborste',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Brödbakningsmix',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Plastfilm, typ gladpack',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Sopsäckar, stora, rullar',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Kaffefilter 1X4',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Soppåsar mindre, rullar',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Hushållspapper, rullar',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Plastpåsar, 3L, paket',purchase_unit=units.count, category=u"torr"),
 ])
 
 dishes = NameDict([
@@ -318,7 +328,20 @@ dishes = NameDict([
     Dish(name=u"Pytt-i-panna", ingredients=[
                 Ingredient(name=u"Rödbetor till pytt-i-panna, portioner", quantity=40 * units.count),
                 Ingredient(name=u"Pytt i panna, portioner", quantity=40 * units.count),
-    ])
+    ]),
+    Dish(name=u"Extras", ingredients=[
+                Ingredient(name=u"Ketchup", quantity=2 * units.count),
+                Ingredient(name=u"Brödbakningsmix", quantity=2 * units.count),
+                Ingredient(name=u"Diskmedel, flaska", quantity=1 * units.count),
+                Ingredient(name=u"Hushållspapper, rullar", quantity=4 * units.count),
+                Ingredient(name=u"Kaffe", quantity=1 * units.kilogram),
+                Ingredient(name=u"Kaffefilter 1X4", quantity=40 * units.count),
+                Ingredient(name=u"Plastfilm, typ gladpack", quantity=1 * units.count),
+                Ingredient(name=u"Plastpåsar, 3L, paket", quantity=1 * units.count),
+                Ingredient(name=u"Rotsaksborste", quantity=1 * units.count),
+                Ingredient(name=u"Soppåsar mindre, rullar", quantity=2 * units.count),
+                Ingredient(name=u"Sopsäckar, stora, rullar", quantity=5 * units.count),
+                ])
 ])
 
 menu = [
@@ -334,6 +357,7 @@ menu = [
     MenuItem(dish=dishes[u"Brunch"], day=u"lördag"),
     MenuItem(dish=dishes[u"Gulasch"], day=u"lördag", variants={"veg": 2}),
     MenuItem(dish=dishes[u"Pytt-i-panna"], day=u"söndag"),    
+    MenuItem(dish=dishes[u"Extras"], day=None),    
     ]
 
 translations = [
