@@ -434,3 +434,9 @@ prebought = [
                 Ingredient(name=u"Köttpålägg, skivor", quantity=175*units.count),
                 Ingredient(name=u"Kycklingfilé", quantity=5*units.kilogram),
             ]
+
+buy_later = [
+                Ingredient(name=u"Ägg",                  quantity=90 * units.count),                
+                Ingredient(name=u"Mjölk",                quantity=11 * units.liters),
+                Ingredient(name=u"Bröd, ljust, skivor",  quantity=40 * units.count),                
+             ]
