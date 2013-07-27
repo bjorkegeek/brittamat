@@ -154,6 +154,8 @@ ingredient_types = NameDict([
     Ingredient(name=u'Tepåsar',purchase_unit=units.count, category=u"torr"),
     Ingredient(name=u'Kanel',purchase_unit=None, category=u"krydd"),
     Ingredient(name=u'Bregott',purchase_unit=units.kilogram, category=u"mejeri"),
+    
+    Ingredient(name=u"Färdigrätt, åt Hannah H E", purchase_unit=units.count, category=u"frys"),
 ])
 
 dishes = NameDict([
@@ -356,6 +358,8 @@ dishes = NameDict([
                 Ingredient(name=u"Rödbetor till pytt-i-panna, portioner", quantity=40 * units.count),
                 Ingredient(name=u"Pytt i panna, portioner", quantity=40 * units.count),
     ]),
+    Dish(name=u"Chili", ingredients=[], variants={
+                "hannah": [ Ingredient(name=u"Färdigrätt, åt Hannah H E", quantity=1 * units.count) ]}),
     Dish(name=u"Extras", ingredients=[
                 Ingredient(name=u"Ketchup", quantity=2 * units.count),
                 Ingredient(name=u"Brödbakningsmix", quantity=2 * units.count),
@@ -415,6 +419,7 @@ menu = [
     MenuItem(dish=dishes[u"Pytt-i-panna"], day=u"söndag"),    
     MenuItem(dish=dishes[u"Frukost/fika"], day=None),
     MenuItem(dish=dishes[u"Extras"], day=None),
+    MenuItem(dish=dishes[u"Chili"], day=None, variants={"hannah": 1}),
     ]
 
 translations = [
