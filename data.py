@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from pint import UnitRegistry
+from pint import UnitRegistry, quantity
 from datetime import datetime
 
 from classes import Ingredient, Dish, MenuItem, NameDict
@@ -69,7 +69,8 @@ ingredient_types = NameDict([
     Ingredient(name=u"Falukorv",       purchase_unit=units.kilograms, category=u"kyl"),
 
     Ingredient(name=u'Chilipulver, röd',purchase_unit=None,           category=u"krydd"),
-    Ingredient(name=u'Gurka',          purchase_unit=units.count,     category=u"grönt"),
+    Ingredient(name=u'Gurka',          purchase_unit=units.kilograms,     category=u"grönt",
+               conversions=[463 * units.grams/ units.count]),
     Ingredient(name=u'Koriander, malen',purchase_unit=None,           category=u"krydd"),
     Ingredient(name=u'Vetemjöl',       purchase_unit=units.kilograms, category=u"torr",
                conversions=[60 * units.grams / units.deciliters]),
@@ -83,25 +84,26 @@ ingredient_types = NameDict([
     Ingredient(name=u'Enbär, torkade', purchase_unit=units.gram,      category=u"krydd"),
     Ingredient(name=u'Grädde',         purchase_unit=units.liter,     category=u"mejeri"),
     Ingredient(name=u'Spiskummin',     purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u'H\xf6grev, benfri',purchase_unit=units.kilogram,category=u"kyl"),
+    Ingredient(name=u'Högrev, benfri',purchase_unit=units.kilogram,category=u"kyl"),
 
     Ingredient(name=u'Kassler',        purchase_unit=units.kilogram,  category=u"kyl"),
-    Ingredient(name=u'Vin\xe4ger, vitvins',purchase_unit=units.liters, category=u"burk"),
+    Ingredient(name=u'Vinäger, vitvins',purchase_unit=units.liters, category=u"burk"),
     Ingredient(name=u'Lök, röd',purchase_unit=units.kilogram,            category=u"grönt",
                conversions=[100 * units.grams / units.count]),
     Ingredient(name=u'Rädisor, knippe',purchase_unit=units.count, category=u"grönt"),
 
     Ingredient(name=u'Prinskorvar',    purchase_unit=units.count, category=u"kyl"),
     Ingredient(name=u'Sill, burk, blandat',purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Knäckebröd, skivor',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Knäckebröd, skivor',purchase_unit=units.count, category=u"torr",
+               conversions=[17 * units.grams / units.count]),
     Ingredient(name=u'Ägg',            purchase_unit=units.count, category=u"kyl"),
     Ingredient(name=u'Köttbullar',     purchase_unit=units.kilogram, category=u"kyl"),
     Ingredient(name=u'Bacon',          purchase_unit=units.kilogram, category=u"kyl"),
 
-    Ingredient(name=u'Paprika, r\xf6d',purchase_unit=units.kilogram, category=u"grönt"),
+    Ingredient(name=u'Paprika, röd',purchase_unit=units.kilogram, category=u"grönt"),
     Ingredient(name=u'Paprikapulver',  purchase_unit=None,           category=u"krydd"),
-    Ingredient(name=u'Br\xf6d, ljust, skivor',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Grytk\xf6tt',purchase_unit=units.kilogram, category=u"kyl"),
+    Ingredient(name=u'Bröd, ljust, skivor',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Grytkött',purchase_unit=units.kilogram, category=u"kyl"),
     Ingredient(name=u'Kolbasz',purchase_unit=units.kilogram, category=u"kyl"),
     Ingredient(name=u'Rödbetor till pytt-i-panna, portioner',purchase_unit=units.count, category=u"burk"),
     Ingredient(name=u'Pytt i panna, portioner',purchase_unit=units.count, category=u"frys"),
@@ -127,6 +129,31 @@ ingredient_types = NameDict([
     Ingredient(name=u'Soppåsar mindre, rullar',purchase_unit=units.count, category=u"torr"),
     Ingredient(name=u'Hushållspapper, rullar',purchase_unit=units.count, category=u"torr"),
     Ingredient(name=u'Plastpåsar, 3L, paket',purchase_unit=units.count, category=u"torr"),
+
+    Ingredient(name=u'Filmjölk',purchase_unit=units.liter, category=u"mejeri"),
+    Ingredient(name=u'Korvpålägg, skivor',purchase_unit=units.count, category=u"kyl"),
+    Ingredient(name=u'Köttpålägg, skivor',purchase_unit=units.count, category=u"kyl"),
+    Ingredient(name=u'Cornflakes',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Jordgubbssylt',purchase_unit=units.kilogram, category=u"burk"),
+    Ingredient(name=u'Digestivekex',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Josextrakt, äpple (måttet är för färdigblandad jos)',purchase_unit=units.liter, category=u"burk"),
+    Ingredient(name=u'Havregryn (bara)',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Josextrakt, apelsin (måttet är för färdigblandad jos)',purchase_unit=units.liter, category=u"burk"),
+    Ingredient(name=u'Kakmix, chokladkaka',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Marmelad',purchase_unit=units.kilogram, category=u"burk"),
+    Ingredient(name=u'Russin',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Ljust bröd, skivor',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Äppelmos',purchase_unit=units.kilogram, category=u"burk"),
+    Ingredient(name=u'Mörkt bröd, skivor',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Frukt, blandad prisvärd',purchase_unit=units.kilogram, category=u"grönt"),
+    Ingredient(name=u'Mariekex',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Müsli',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Paprika, valfri',purchase_unit=units.kilogram, category=u"grönt"),
+    Ingredient(name=u'Skorpor',purchase_unit=units.kilogram, category=u"torr"),
+    Ingredient(name=u'Tomat',purchase_unit=units.kilogram, category=u"grönt"),
+    Ingredient(name=u'Tepåsar',purchase_unit=units.count, category=u"torr"),
+    Ingredient(name=u'Kanel',purchase_unit=None, category=u"krydd"),
+    Ingredient(name=u'Bregott',purchase_unit=units.kilogram, category=u"mejeri"),
 ])
 
 dishes = NameDict([
@@ -142,7 +169,7 @@ dishes = NameDict([
                 Ingredient(name=u"Peppar, svart",  quantity=None)
                 ], variants={
                 "veg": [
-                    Ingredient(name=u"Pasta, glutenfri, portioner", quantity=1*units.count)
+                    Ingredient(name=u"Quornfiléer", quantity=1*units.count)
                     ]
                 }),
     Dish(name=u"Kycklinggryta med fetaost", ingredients=[
@@ -341,7 +368,36 @@ dishes = NameDict([
                 Ingredient(name=u"Rotsaksborste", quantity=1 * units.count),
                 Ingredient(name=u"Soppåsar mindre, rullar", quantity=2 * units.count),
                 Ingredient(name=u"Sopsäckar, stora, rullar", quantity=5 * units.count),
-                ])
+    ]),
+    Dish(name=u"Frukost/fika", ingredients=[
+                Ingredient(name=u"Jordgubbssylt", quantity=2*units.kilogram),
+                Ingredient(name=u"Josextrakt, äpple (måttet är för färdigblandad jos)", quantity=27*units.liter),
+                Ingredient(name=u"Josextrakt, apelsin (måttet är för färdigblandad jos)", quantity=27*units.liter),
+                Ingredient(name=u"Marmelad", quantity=3*units.kilogram),
+                Ingredient(name=u"Russin", quantity=1.5*units.kilogram),
+                Ingredient(name=u"Äppelmos", quantity=6*units.kilogram),
+                Ingredient(name=u"Frukt, blandad prisvärd", quantity=32.5*units.kilogram),
+                Ingredient(name=u"Gurka", quantity=2*units.kilogram),
+                Ingredient(name=u"Paprika, valfri", quantity=2*units.kilogram),
+                Ingredient(name=u"Tomat", quantity=2*units.kilogram),
+                Ingredient(name=u"Kanel", quantity=None),
+                Ingredient(name=u"Bregott", quantity=4.2*units.kilogram),
+                Ingredient(name=u"Filmjölk", quantity=16*units.liter),
+                Ingredient(name=u"Korvpålägg, skivor", quantity=150*units.count),
+                Ingredient(name=u"Köttpålägg, skivor", quantity=250*units.count),
+                Ingredient(name=u"Mjölk", quantity=22*units.liter),
+                Ingredient(name=u"Cornflakes", quantity=2*units.kilogram),
+                Ingredient(name=u"Digestivekex", quantity=400*units.count),
+                Ingredient(name=u"Havregryn (bara)", quantity=5*1.5*units.kilogram),
+                Ingredient(name=u"Kakmix, chokladkaka", quantity=4*units.count),
+                Ingredient(name=u"Knäckebröd, skivor", quantity=2*units.kilogram),
+                Ingredient(name=u"Ljust bröd, skivor", quantity=9*40*units.count),
+                Ingredient(name=u"Mörkt bröd, skivor", quantity=40*units.count),
+                Ingredient(name=u"Mariekex", quantity=600*units.count),
+                Ingredient(name=u"Müsli", quantity=4*units.kilogram),
+                Ingredient(name=u"Skorpor", quantity=6*units.kilogram),
+                Ingredient(name=u"Tepåsar", quantity=150*units.count),
+    ]),        
 ])
 
 menu = [
@@ -357,7 +413,8 @@ menu = [
     MenuItem(dish=dishes[u"Brunch"], day=u"lördag"),
     MenuItem(dish=dishes[u"Gulasch"], day=u"lördag", variants={"veg": 2}),
     MenuItem(dish=dishes[u"Pytt-i-panna"], day=u"söndag"),    
-    MenuItem(dish=dishes[u"Extras"], day=None),    
+    MenuItem(dish=dishes[u"Frukost/fika"], day=None),
+    MenuItem(dish=dishes[u"Extras"], day=None),
     ]
 
 translations = [
@@ -366,3 +423,9 @@ translations = [
     ("deciliter", "dl"),
     ("gram", "g")
     ]
+
+prebought = [
+                Ingredient(name=u"Korvpålägg, skivor", quantity=50*units.count),
+                Ingredient(name=u"Köttpålägg, skivor", quantity=175*units.count),
+                Ingredient(name=u"Kycklingfilé", quantity=5*units.kilogram),
+            ]
