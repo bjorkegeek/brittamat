@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+body {
+	font-size: 10pt;
+}
+
+.numeric {
+	text-align: right;
+}
+
+th {
+	text-align: left;
+}
+
+table.tbl {
+	page-break-after: always;
+}
+
+td.sources {
+	font-size: 8pt;
+}

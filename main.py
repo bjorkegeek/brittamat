@@ -4,7 +4,7 @@
 import alg
 import data
 import locale
-import latex
+import html5
 import codecs
 
 def main():
@@ -26,8 +26,8 @@ def main():
         return
 
     shopping_list = alg.make_shopping_list(data.menu, data.ingredient_types)
-    with codecs.open("shopping.tex","w","utf-8") as f:
-        latex.shopping_list_to_latex(shopping_list,f)
+    with codecs.open("shopping.html","w","utf-8") as f:
+        html5.shopping_list_to_html5(shopping_list,f)
         
 if __name__ == "__main__":
     main()
