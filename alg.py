@@ -68,11 +68,26 @@ def make_shopping_list(menu, ingredient_types):
             if entry:
                 if not pu is None:
                     entry.quantity += pu
+                    entry.sources.append(menuitem)
             else:
                 entry = classes.Ingredient(ingredient_types[ingredient.name])
                 entry.quantity = pu
+                entry.sources = [menuitem]
                 shopping_list.append(entry)
     return shopping_list.values()
+
+def subtract_from_shopping_list(shopping_list, sub, ingredient_types):
+    subd = classes.NameDict(sub)
+    for ingredient in shopping_list:
+        sub_ingredient = subd.get(ingredient.name, None)
+        if sub_ingredient is None:
+            yield ingredient
+        else:
+            # Copy
+            ing = classes.Ingredient(ingredient)
+            pu = to_purchase_unit(sub_ingredient, ingredient_types)
+            ing.quantity -= pu
+            yield ing
 
 def order_by_category(shopping_list):
     cats = {}

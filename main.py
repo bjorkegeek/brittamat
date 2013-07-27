@@ -26,6 +26,7 @@ def main():
         return
 
     shopping_list = alg.make_shopping_list(data.menu, data.ingredient_types)
+    shopping_list = alg.subtract_from_shopping_list(shopping_list, data.prebought, data.ingredient_types)
     with codecs.open("shopping.html","w","utf-8") as f:
         html5.shopping_list_to_html5(shopping_list,f)
         
