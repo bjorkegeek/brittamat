@@ -12,6 +12,14 @@ th {
 	text-align: left;
 }
 
+.ingredient {
+	padding-left: 4pt;
+}
+
+.sources {
+	padding-left: 12pt;
+}
+
 table.tbl {
 	page-break-after: always;
 }
