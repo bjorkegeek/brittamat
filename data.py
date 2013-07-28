@@ -361,7 +361,7 @@ dishes = NameDict([
                 Ingredient(name=u"Brödbakningsmix", quantity=2 * units.count),
                 Ingredient(name=u"Diskmedel, flaska", quantity=1 * units.count),
                 Ingredient(name=u"Hushållspapper, rullar", quantity=4 * units.count),
-                Ingredient(name=u"Kaffe", quantity=1 * units.kilogram),
+                Ingredient(name=u"Kaffe", quantity=10 * units.kilogram),
                 Ingredient(name=u"Kaffefilter 1X4", quantity=40 * units.count),
                 Ingredient(name=u"Plastfilm, typ gladpack", quantity=1 * units.count),
                 Ingredient(name=u"Plastpåsar, 3L, paket", quantity=1 * units.count),
