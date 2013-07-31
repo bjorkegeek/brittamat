@@ -6,9 +6,14 @@ import data
 import locale
 import html5
 import codecs
+import sys
 
 def main():
-    locale.setlocale(locale.LC_ALL, 'sv_SE')
+    if sys.platform == 'win32':
+        locale.setlocale(locale.LC_ALL, 'swedish' )
+    else:
+        locale.setlocale(locale.LC_ALL, 'sv_SE' )
+
     found_undef = False
     for ingredient in alg.find_undefined_ingredients(data.menu, data.ingredient_types):
         if not found_undef:

@@ -5,17 +5,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e39502d0-c70b-4bd4-bf33-161e81b8fca4</ProjectGuid>
     <ProjectHome>..\</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <InterpreterId>00000000-0000-0000-0000-000000000000</InterpreterId>
-    <InterpreterVersion>
-    </InterpreterVersion>
+    <InterpreterId>{7838e193-d3e7-472d-8a1a-acb457256613}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
     <Name>VisualStudio</Name>
     <RootNamespace>Brittamat</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,9 +28,22 @@
     <Compile Include="alg.py" />
     <Compile Include="classes.py" />
     <Compile Include="data.py" />
+    <Compile Include="html5.py" />
     <Compile Include="latex.py" />
     <Compile Include="main.py" />
     <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>{7838e193-d3e7-472d-8a1a-acb457256613}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>env (Python 64-bit 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
