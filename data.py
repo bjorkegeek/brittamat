@@ -38,7 +38,7 @@ ingredient_types = NameDict([
     Ingredient(name=u"Pasta, skruvar", purchase_unit=units.kilograms, category=u"torr"),
     Ingredient(name=u"Socker",         purchase_unit=units.kilograms, category=u"torr",
                conversions=[1 * units.deciliters / (88 * units.grams)]),
-    Ingredient(name=u"Ris",            purchase_unit=units.kilograms, category=u"torr",
+    Ingredient(name=u"Ris, parboiled", purchase_unit=units.kilograms, category=u"torr",
                conversions=[0.9 * units.grams / units.cm**3]),
     Ingredient(name=u"Vitlöksklyftor", purchase_unit=units.grams, category=u"grönt",
                conversions=[6 * units.grams / units.count]),
@@ -164,6 +164,8 @@ ingredient_types = NameDict([
     Ingredient(name=u'Cirtronjuice',purchase_unit=units.deciliter, category=u"burk"),
     Ingredient(name=u'Lax',purchase_unit=units.gram, category=u"kyl"),
 
+    Ingredient(name=u"Ris, basmati", purchase_unit=units.kilograms, category=u"torr",
+               conversions=[0.9 * units.grams / units.cm**3]),
 ])
 
 dishes = NameDict([
@@ -245,7 +247,7 @@ dishes = NameDict([
                 Ingredient(name=u"Salt",                 quantity=None),
                 Ingredient(name=u"Timjan",               quantity=None),
                 Ingredient(name=u"Olja, raps",           quantity=1 * units.deciliters),
-                Ingredient(name=u"Ris",                  quantity=6 * units.liters),
+                Ingredient(name=u"Ris, parboiled",       quantity=6 * units.liters),
                 ], variants={
                 "laktosfri": [
                     Ingredient(name=u"Mjölk, laktosfri", quantity=1 * units.deciliters),
@@ -285,6 +287,7 @@ dishes = NameDict([
                 Ingredient(name=u"Chilipulver, röd",     quantity=None),
                 Ingredient(name=u"Koriander, malen",     quantity=None),
                 Ingredient(name=u"Citroner",             quantity=3 * units.count),
+                Ingredient(name=u"Ris, basmati",         quantity=6 * units.liters),
                 ], variants={
                 "hannah": [
                     Ingredient(name=u"Tofu, portioner", quantity=1 * units.count)
@@ -373,7 +376,7 @@ dishes = NameDict([
                 Ingredient(name=u"Pytt i panna, portioner", quantity=40 * units.count),
     ]),
     Dish(name=u"Chili", ingredients=[
-                Ingredient(name=u"Ris",                  quantity=6 * units.liters),
+                Ingredient(name=u"Ris, parboiled",          quantity=6 * units.liters),
                 ], variants={
                 "hannah": [ Ingredient(name=u"Färdigrätt, åt Hannah H E", quantity=1 * units.count) ]}),
     Dish(name=u"Extras", ingredients=[
