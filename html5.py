@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import alg
-import locale
 from cgi import escape
+from babel.numbers import format_decimal
 
 def shopping_list_to_html5(shopping_list, outputfile):
     print >>outputfile, u'<html><head><link rel="stylesheet" href="shopping.css"/><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head>'
@@ -17,8 +17,7 @@ def shopping_list_to_html5(shopping_list, outputfile):
         for ingredient in sorted(ingredients):
             print >>outputfile, u'  <tr>'
             if ingredient.quantity:
-                formatst = u"%.1f"
-                print >>outputfile,u'    <td class="numeric">' + locale.format(formatst,ingredient.quantity.magnitude) + '</td>'
+                print >>outputfile,u'    <td class="numeric">' + format_decimal(ingredient.quantity.magnitude, locale='sv_SE') + '</td>'
                 print >>outputfile,u'    <td>' + escape(alg.translate_unit(unicode(ingredient.quantity.units))) + '</td>'
             else:
                 print >>outputfile,u'    <td colspan="2"></td>'
