@@ -27,7 +27,7 @@ ingredient_types = NameDict([
                conversions=[1.1 * units.kilograms / (15 * units.deciliters)]),
     Ingredient(name=u"Salt",           purchase_unit=None,            category=u"krydd"),
     Ingredient(name=u"Peppar, svart",  purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Peppar, svart, hel",purchase_unit=None,            category=u"krydd"),
+    Ingredient(name=u"Peppar, svart, hel",purchase_unit=None,         category=u"krydd"),
     Ingredient(name=u"Basilika",       purchase_unit=None,            category=u"krydd"),
     Ingredient(name=u"Oregano",        purchase_unit=None,            category=u"krydd"),
     Ingredient(name=u"Timjan",         purchase_unit=None,            category=u"krydd"),
@@ -83,6 +83,7 @@ ingredient_types = NameDict([
     Ingredient(name=u'Citroner',       purchase_unit=units.count,     category=u"grönt"),
     Ingredient(name=u'Enbär, torkade', purchase_unit=units.gram,      category=u"krydd"),
     Ingredient(name=u'Grädde',         purchase_unit=units.liter,     category=u"mejeri"),
+    Ingredient(name=u'Smör',           purchase_unit=units.gram,     category=u"mejeri"),
     Ingredient(name=u'Spiskummin',     purchase_unit=None,            category=u"krydd"),
     Ingredient(name=u'Högrev, benfri',purchase_unit=units.kilogram,category=u"kyl"),
 
@@ -370,6 +371,7 @@ dishes = NameDict([
                 Ingredient(name=u"Sopsäckar, stora, rullar", quantity=5 * units.count),
     ]),
     Dish(name=u"Frukost/fika", ingredients=[
+                Ingredient(name=u"Smör", quantity=2*units.kilogram),
                 Ingredient(name=u"Jordgubbssylt", quantity=2*units.kilogram),
                 Ingredient(name=u"Josextrakt, äpple (måttet är för färdigblandad jos)", quantity=27*units.liter),
                 Ingredient(name=u"Josextrakt, apelsin (måttet är för färdigblandad jos)", quantity=27*units.liter),
@@ -387,7 +389,7 @@ dishes = NameDict([
                 Ingredient(name=u"Köttpålägg, skivor", quantity=250*units.count),
                 Ingredient(name=u"Mjölk", quantity=22*units.liter),
                 Ingredient(name=u"Cornflakes", quantity=2*units.kilogram),
-                Ingredient(name=u"Digestivekex", quantity=400*units.count),
+                Ingredient(name=u"Digestivekex", quantity=350*units.count),
                 Ingredient(name=u"Havregryn (bara)", quantity=5*1.5*units.kilogram),
                 Ingredient(name=u"Kakmix, chokladkaka", quantity=4*units.count),
                 Ingredient(name=u"Knäckebröd, skivor", quantity=2*units.kilogram),
