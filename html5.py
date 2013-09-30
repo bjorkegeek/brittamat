@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import alg
-import locale
 from cgi import escape
+from babel.numbers import format_decimal
 
 def shopping_list_to_html5(shopping_list, outputfile):
     print >>outputfile, u'<html><head><link rel="stylesheet" href="shopping.css"/><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head>'
