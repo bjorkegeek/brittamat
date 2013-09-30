@@ -18,7 +18,7 @@ def shopping_list_to_html5(shopping_list, outputfile):
             print >>outputfile, u'  <tr>'
             if ingredient.quantity:
                 formatst = u"%.1f"
-                print >>outputfile,u'    <td class="numeric amt-magnitude">' + locale.format(formatst,ingredient.quantity.magnitude) + '</td>'
+                print >>outputfile,u'    <td class="numeric amt-magnitude">' + format_decimal(ingredient.quantity.magnitude, locale='sv_SE') + '</td>'
                 print >>outputfile,u'    <td class="amt-unit">' + escape(alg.translate_unit(unicode(ingredient.quantity.units))) + '</td>'
             else:
                 print >>outputfile,u'    <td colspan="2"></td>'
