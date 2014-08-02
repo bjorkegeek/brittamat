@@ -87,7 +87,7 @@ def subtract_from_shopping_list(shopping_list, sub, ingredient_types):
             ing = classes.Ingredient(ingredient)
             pu = to_purchase_unit(sub_ingredient, ingredient_types)
             ing.quantity -= pu
-            if ing.quantity:
+            if ing.quantity and ing.quantity.magnitude>0:
                 yield ing
 
 def order_by_category(shopping_list):
