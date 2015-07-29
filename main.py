@@ -30,7 +30,8 @@ def main():
         html5.shopping_list_to_html5(shopping_list,f)
         
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print unicode(e).encode("utf-8")
+    main()
+    #try:
+    #    main()
+    #except Exception as e:
+    #    print unicode(e).encode("utf-8")
