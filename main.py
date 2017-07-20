@@ -8,7 +8,9 @@ import codecs
 
 def main():    
     found_undef = False
-    for ingredient in alg.find_undefined_ingredients(data.menu, data.ingredient_types):
+    menu = data.menu
+    
+    for ingredient in alg.find_undefined_ingredients(menu, data.ingredient_types):
         if not found_undef:
             print "# Undefined ingredients:" 
             found_undef = True
@@ -23,7 +25,12 @@ def main():
     if found_undef:
         return
 
-    shopping_list = alg.make_shopping_list(data.menu, data.ingredient_types)
+    menu = list(alg.scaled_menu(menu, 0.75))
+    for i, menu_item in enumerate(menu):
+        if menu_item.dish.name == u"Porterstek":
+            menu[i].dish = alg.scaled_dish(menu[i].dish, 1/.75)
+
+    shopping_list = alg.make_shopping_list(menu, data.ingredient_types)
     shopping_list = alg.subtract_from_shopping_list(shopping_list, data.prebought, data.ingredient_types)
     shopping_list = alg.subtract_from_shopping_list(shopping_list, data.buy_later, data.ingredient_types)
     with codecs.open("shopping.html","w","utf-8") as f:
