@@ -63,7 +63,7 @@ def make_shopping_list(menu, ingredient_types):
             pu = to_purchase_unit(ingredient, ingredient_types)
             if not pu is None:
                 pu *= count
-
+            
             entry = shopping_list.get(ingredient.name)
             if entry:
                 if not pu is None:
@@ -97,3 +97,20 @@ def order_by_category(shopping_list):
     
     for x in sorted(cats.iteritems()):
         yield x
+
+def scaled_dish(dish, factor):
+    return classes.Dish(name=dish.name, variants=dish.variants, ingredients = [
+        classes.Ingredient(name=ingredient.name,
+                           quantity=ingredient.quantity*factor)
+        if ingredient.quantity is not None
+        else ingredient
+        for ingredient in dish.ingredients
+        ])
+    
+
+def scaled_menu(menu, factor):
+    for item in menu:
+        d = item.__dict__.copy()
+        d["dish"] = scaled_dish(d["dish"], factor)
+        yield classes.MenuItem(**d)
+        
