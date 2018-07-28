@@ -25,10 +25,11 @@ def main():
     if found_undef:
         return
 
-    menu = list(alg.scaled_menu(menu, 0.75))
     for i, menu_item in enumerate(menu):
         if menu_item.dish.name == u"Porterstek":
-            menu[i].dish = alg.scaled_dish(menu[i].dish, 1/.75)
+            menu[i].dish = alg.scaled_dish(menu[i].dish, 28.0/36.0) # scale to amouont of people on change day
+        else:
+            menu[i].dish = alg.scaled_dish(menu[i].dish, 24.0/36.0) # scale to amount of poeple on other days
 
     shopping_list = alg.make_shopping_list(menu, data.ingredient_types)
     shopping_list = alg.subtract_from_shopping_list(shopping_list, data.prebought, data.ingredient_types)
