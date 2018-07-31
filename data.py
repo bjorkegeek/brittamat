@@ -70,7 +70,7 @@ ingredient_types = NameDict([
     Ingredient(name=u"Mjölk",          purchase_unit=units.liters,    category=u"mejeri"),
     Ingredient(name=u"Gräddfil",       purchase_unit=units.liters,    category=u"mejeri"),
     Ingredient(name=u"Gräddfil, laktosfri",       purchase_unit=units.liters,    category=u"mejeri"),
-    Ingredient(name=u"Creme Fraiche, lätt",          purchase_unit=units.liters,    category=u"mejeri"),
+    Ingredient(name=u"Creme Fraiche",          purchase_unit=units.liters,    category=u"mejeri"),
     Ingredient(name=u"Köttfärs, nöt",  purchase_unit=units.kilograms, category=u"kyl"),
     Ingredient(name=u"Falukorv",       purchase_unit=units.kilograms, category=u"kyl"),
 
@@ -261,7 +261,7 @@ dishes = NameDict([
                 Ingredient(name=u"Fransk senap",         quantity=1.5 * units.deciliters),
                 Ingredient(name=u"Mjölk",                quantity=3 * units.liters),
                 Ingredient(name=u"Buljongtärning, grönsak", quantity=4 * units.count),
-                Ingredient(name=u"Creme Fraiche, lätt",  quantity=3 * units.liters),
+                Ingredient(name=u"Creme Fraiche",  quantity=3 * units.liters),
                 Ingredient(name=u"Ketchup",              quantity=.5 * units.count),
                 Ingredient(name=u"Sambal oelek",         quantity=4 * units.tablespoons),
                 Ingredient(name=u"Socker",               quantity=4 * units.deciliters),
@@ -288,7 +288,7 @@ dishes = NameDict([
     Dish(name=u"Fisksoppa", ingredients=[
                 Ingredient(name=u"Fisk (kolja, sej)",    quantity=5.5 * units.kilograms),
                 Ingredient(name=u"Potatis",              quantity=3   * units.kilograms),
-                Ingredient(name=u"Morötter",             quantity=2   * units.count),
+                Ingredient(name=u"Morötter",             quantity=2   * units.kilograms),
                 Ingredient(name=u"Palsternacka",         quantity=1.2 * units.kilograms),
                 Ingredient(name=u"Buljongtärning, fisk", quantity=24  * units.count),
                 Ingredient(name=u"Socker",               quantity=1.5 * units.deciliters),
@@ -298,7 +298,7 @@ dishes = NameDict([
                 Ingredient(name=u"Curry",                quantity=0.5 * units.deciliters),
                 Ingredient(name=u"Salt, grov",           quantity=None),
                 Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Creme Fraiche, lätt",  quantity=2 * units.liters),
+                Ingredient(name=u"Creme Fraiche",  quantity=2 * units.liters),
                  ], variants={                
                 u"helveg": [
                     Ingredient(name=u"Vegetarisk ärtsoppa burk", quantity=1 * units.count)
@@ -377,7 +377,7 @@ dishes = NameDict([
                     Ingredient(name=u"Quornfiléer", quantity=2*units.count),
                     Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count),
                     ],
-                "glutenfri": [
+                u"glutenfri": [
                     Ingredient(name=u"Maizena, ej ljus/mörk", quantity=None)
                 ]
                 }),
@@ -487,10 +487,11 @@ dishes = NameDict([
                 Ingredient(name=u"Soppåsar mindre, rullar", quantity=2 * units.count),
                 Ingredient(name=u"Sopsäckar, stora, rullar", quantity=5 * units.count),
                 Ingredient(name=u"Riktigt jävla smör", quantity=2*units.kilogram),
+                Ingredient(name=u"Grädde", quantity=1*units.liter),
                 Ingredient(name=u"Havregryn (bara)", quantity=3*units.kilogram),
                 Ingredient(name=u"Sirap, ljus", quantity=750*units.gram),
                 Ingredient(name=u"Vetemjöl", quantity=2*units.kilogram),
-   ]),
+    ]),
     Dish(name=u"Frukost/fika", ingredients=[
                 Ingredient(name=u"Jordgubbssylt", quantity=2*units.kilogram),
                 Ingredient(name=u"Josextrakt, äpple (måttet är för färdigblandad jos)", quantity=27*units.liter),
@@ -532,8 +533,7 @@ dishes = NameDict([
                               ],
                 u"mjölkfri": [
                     Ingredient(name=u"Sojamjölk", quantity=1*units.liter),
-                              ],
-                    
+                              ],                    
                 }),
 ])
 
@@ -583,17 +583,20 @@ translations = [
 #                 Ingredient(name=u"Buljongtärning, grönsak", quantity=11*units.count),
 #             ]
 prebought = [
-#                Ingredient(name=u"Kycklingfilé",         quantity=5*units.kilogram),
+                Ingredient(name=u"Kycklingfilé",            quantity=5   * units.kilogram),
+                Ingredient(name=u"Fisk (kolja, sej)",       quantity=2.5 * units.kilogram),
+                Ingredient(name=u"Buljongtärning, kött",    quantity=6   * units.count),
+                Ingredient(name=u"Buljongtärning, grönsak", quantity=8   * units.count),
+                Ingredient(name=u"Grädde",                  quantity=9   * units.liters),
+                Ingredient(name=u"Olja, raps",              quantity=9   * units.deciliters),
 #                Ingredient(name=u"Kikärtor, avrunnen vikt",     quantity=1.5 * units.kilograms),
 #                Ingredient(name=u"Kidneybönor, avrunnen vikt",  quantity=1.5 * units.kilograms),
 #                Ingredient(name=u"Fänkål",               quantity=5.4 * units.kilograms),
 #                Ingredient(name=u"Lax",                  quantity=150 * 40 * units.gram),
-                Ingredient(name=u"Buljongtärning, kött", quantity=20 * units.count),
-                Ingredient(name=u"Grädde",               quantity=10 * units.liters),
 #                Ingredient(name=u"Tomatpuré",            quantity=440 * units.grams),
 ]
 buy_later = [
-                Ingredient(name=u"Ägg",                  quantity=90 * units.count),                
-                Ingredient(name=u"Mjölk",                quantity=11 * units.liters),
+                Ingredient(name=u"Ägg",                  quantity=90 * units.count),    # simply do not buy them before
+                Ingredient(name=u"Mjölk",                quantity=8  * units.liters),
                 Ingredient(name=u"Bröd, ljust, skivor",  quantity=40 * units.count),                
              ]
