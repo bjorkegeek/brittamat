@@ -203,7 +203,7 @@ dishes = NameDict([
                 Ingredient(name=u"Salt",           quantity=None),
                 Ingredient(name=u"Peppar, svart",  quantity=None)
                 ], variants={
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Quornfiléer", quantity=1*units.count)
                     ]
                 }),
@@ -221,7 +221,7 @@ dishes = NameDict([
                 Ingredient(name=u"Salt",                 quantity=None),
                 Ingredient(name=u"Pasta, Penne",         quantity=5 * units.kilogram),
                 ], variants={
-                u"veg": [
+                u"vegetarian": [
                     Ingredient(name=u"Quornfiléer", quantity=2*units.count),
                     Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count)
                     ],
@@ -249,7 +249,7 @@ dishes = NameDict([
                 "glutenfri": [
                     Ingredient(name=u"Pasta, glutenfri, portioner", quantity=1*units.count)
                     ],
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Quornburgare", quantity=1*units.count),
                     Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count)
                     ],
@@ -277,7 +277,7 @@ dishes = NameDict([
                     Ingredient(name=u"Mjölk, laktosfri", quantity=1 * units.deciliters),
                     Ingredient(name=u"Creme Fraiche, laktosfri", quantity=.5 * units.deciliters),
                     ],
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count)
                     ],
                 u"mjölkfri": [
@@ -300,13 +300,13 @@ dishes = NameDict([
                 Ingredient(name=u"Peppar, svart",        quantity=None),
                 Ingredient(name=u"Creme Fraiche",  quantity=2 * units.liters),
                  ], variants={                
-                u"helveg": [
+                u"vegan": [
                     Ingredient(name=u"Vegetarisk ärtsoppa burk", quantity=1 * units.count)
                 ],
                 u"laktosfri": [
                     Ingredient(name=u"Gräddfil, laktosfri", quantity=1 * units.deciliters)
                     ],
-                u"veg": [],
+                u"vegetarian": [],
                 }),
         Dish(name=u"Lax", ingredients=[
                 Ingredient(name=u"Salt, grov",           quantity=None),
@@ -319,7 +319,7 @@ dishes = NameDict([
                 Ingredient(name=u"Gräddfil",             quantity=3 * units.liters),                
                 Ingredient(name=u"Lax",                  quantity= 150 * 1.10 * 36 * units.gram),                
                 ], variants={
-                u"helveg": [
+                u"vegan": [
                     Ingredient(name=u"Vegetarisk ärtsoppa burk", quantity=1 * units.count)
                 ],
                 u"laktosfri": [
@@ -346,7 +346,7 @@ dishes = NameDict([
                 Ingredient(name=u"Citroner",             quantity=3 * units.count),
                 Ingredient(name=u"Ris, basmati",         quantity=6 * units.liters),
                 ], variants={
-                u"veg": [],
+                u"vegetarian": [],
                 u"laktosfri": [],
                 }),
     Dish(name=u"Porterstek", ingredients=[
@@ -373,7 +373,7 @@ dishes = NameDict([
                 u"mjölkfri": [
                     Ingredient(name=u"Grädde, mjölkfri", quantity=1 * units.deciliters)
                     ],
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Quornfiléer", quantity=2*units.count),
                     Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count),
                     ],
@@ -392,7 +392,7 @@ dishes = NameDict([
                 Ingredient(name=u"Fransk senap",         quantity=7 * units.tablespoons),
                 Ingredient(name=u"Peppar, svart",        quantity=None),
                 ], variants={
-                u"veg": [
+                u"vegetarian": [
                     Ingredient(name=u"Quornburgare", quantity=2 * units.count)
                     ],
                 u"laktosfri": [],
@@ -407,10 +407,10 @@ dishes = NameDict([
                 "laktosfri": [
                     Ingredient(name=u"Gräddfil, laktosfri", quantity=.5 * units.deciliters)
                     ],
-                u"helveg": [
+                u"vegan": [
                     Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
                 ],
-                u"veg": [],
+                u"vegetarian": [],
                 }),
     Dish(name=u"Brunch", ingredients=[
                 Ingredient(name=u"Bacon",                quantity=12*125 * units.grams),                
@@ -425,10 +425,10 @@ dishes = NameDict([
                 u"laktosfri": [
                     Ingredient(name=u"Grädde, laktosfri", quantity=0.2 * units.deciliters)
                     ],
-                u"helveg": [
+                u"vegan": [
                     Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
                 ],
-                u"veg": [
+                u"vegetarian": [
                     Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),                
                 ],
                 }),                
@@ -446,7 +446,7 @@ dishes = NameDict([
                 Ingredient(name=u"Olja, raps",           quantity=1.6 * units.deciliters),
                 Ingredient(name=u"Bröd, ljust, skivor",  quantity=40 * units.count),                
                 ], variants={
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
                     Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count),
                     ],
@@ -456,10 +456,10 @@ dishes = NameDict([
                 Ingredient(name=u"Rödbetor till pytt-i-panna, portioner", quantity=40 * units.count),
                 Ingredient(name=u"Pytt i panna, portioner", quantity=40 * units.count),
                 ], variants={
-                "veg": [
+                "vegetarian": [
                     Ingredient(name=u"Pytt i panna, vegetarisk, portioner", quantity=1 * units.count),
                     ],
-                "helveg": [
+                "vegan": [
                     Ingredient(name=u"Pytt i panna, vegetarisk, portioner", quantity=1 * units.count),
                     ],
                 "laktosfri" : []
@@ -470,9 +470,9 @@ dishes = NameDict([
                 "hannah": [ 
                     Ingredient(name=u"Färdigrätt, åt Hannah H E", quantity=1 * units.count) 
                     ],
-                u"veg" : [], # blandar inte i kött i en andel
-                u"helveg" : [], # blandar inte i kött i en andel
-                u"laktosfri" : [] # blandar inte i kött i en andel
+                u"vegetarian" : [], # blandar inte i kött i en andel
+                u"vegan" : [],      # blandar inte i kött i en andel
+                u"laktosfri" : []   
                 }),
     Dish(name=u"Extras", ingredients=[
                 Ingredient(name=u"Ketchup", quantity=2 * units.count),
@@ -541,25 +541,25 @@ dishes = NameDict([
 # mjölkfri
 # glutenfri
 # veg
-# helveg
+# vegan
 
 menu = [
     MenuItem(dish=dishes[u"Fänkål och kycklingsallad"], day=u"måndag"),
     MenuItem(dish=dishes[u"Pasta & köttfärssås"],       day=u"måndag"),
     MenuItem(dish=dishes[u"Korv stroganoff"],           day=u"tisdag"),
 #    MenuItem(dish=dishes[u"Lax"], day=u"tisdag"),
-    MenuItem(dish=dishes[u"Fisksoppa"],                 day=u"tisdag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"2 x Indisk curry"],          day=u"onsdag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Porterstek"],                day=u"onsdag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Kassler med potatissallad"], day=u"torsdag", variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Kycklinggryta med fetaost"], day=u"torsdag", variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Sill och potatis"],          day=u"fredag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Brunch"],                    day=u"lördag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Gulasch"],                   day=u"lördag",  variants={"laktosfri": 1, "veg": 3}),
-    MenuItem(dish=dishes[u"Pytt-i-panna"],              day=u"söndag",  variants={"laktosfri": 1, "veg": 3}),    
+    MenuItem(dish=dishes[u"Fisksoppa"],                 day=u"tisdag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"2 x Indisk curry"],          day=u"onsdag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Porterstek"],                day=u"onsdag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Kassler med potatissallad"], day=u"torsdag", variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Kycklinggryta med fetaost"], day=u"torsdag", variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Sill och potatis"],          day=u"fredag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Brunch"],                    day=u"lördag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Gulasch"],                   day=u"lördag",  variants={"laktosfri": 1, "vegetarian": 3}),
+    MenuItem(dish=dishes[u"Pytt-i-panna"],              day=u"söndag",  variants={"laktosfri": 1, "vegetarian": 3}),    
     MenuItem(dish=dishes[u"Frukost/fika"],              day=None,       variants={"laktosfri": 1, u"mjölkfri": 0, "glutenfri": 1}),
     MenuItem(dish=dishes[u"Extras"],                    day=None),
-    MenuItem(dish=dishes[u"Chili"],                     day=None,       variants={"laktosfri": 1, "veg": 3 }),
+    MenuItem(dish=dishes[u"Chili"],                     day=None,       variants={"laktosfri": 1, "vegetarian": 3 }),
     ]
 
 translations = [
