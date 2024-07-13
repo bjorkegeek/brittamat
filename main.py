@@ -7,7 +7,7 @@ import html5
 import codecs
 
 
-def main():
+def main() -> None:
     found_undef = False
     menu = data.menu
 

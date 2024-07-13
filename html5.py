@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
+from typing import IO, AnyStr, List
 
 import alg
 from html import escape
 from babel.numbers import format_decimal
 
+from classes import ShoppingListEntry
 
-def shopping_list_to_html5(shopping_list, outputfile):
+
+def shopping_list_to_html5(
+    shopping_list: list[ShoppingListEntry], outputfile: IO[AnyStr]
+):
     print(
         '<html><head><link rel="stylesheet" href="shopping.css"/><meta http-equiv="content-type" content="text/html; charset=UTF-8" /></head>',
         file=outputfile,
     )
     print("<body>", file=outputfile)
+    ingredients: list[ShoppingListEntry]
     for cat, ingredients in sorted(alg.order_by_category(shopping_list)):
         print("<h1>" + escape(cat) + "</h1>", file=outputfile)
         print('<table class="tbl">', file=outputfile)

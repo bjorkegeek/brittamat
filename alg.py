@@ -1,3 +1,6 @@
+from copy import copy
+from typing import TypeVar, Iterable, Iterator, Optional, cast
+
 import classes
 import operator
 import itertools
@@ -6,7 +9,10 @@ import re
 import data
 
 
-def powerset(iterable):
+T = TypeVar("T")
+
+
+def powerset(iterable: Iterable[T]) -> Iterator[tuple[T, ...]]:
     "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
     s = list(iterable)
     return itertools.chain.from_iterable(
@@ -14,7 +20,9 @@ def powerset(iterable):
     )
 
 
-def to_purchase_unit(ingredient, ingredient_types):
+def to_purchase_unit(
+    ingredient: classes.Ingredient, ingredient_types: dict[str, classes.IngredientType]
+) -> Optional[pint.Quantity]:
     it = ingredient_types[ingredient.name]
     if ingredient.quantity is None and it.purchase_unit is None:
         return None
@@ -30,7 +38,10 @@ def to_purchase_unit(ingredient, ingredient_types):
             v = ingredient.quantity
             for conversion in subconversions:
                 v = op(v, conversion)
-            return v.to(it.purchase_unit)
+            if v is None:
+                return None
+            else:
+                return cast(pint.Quantity, v.to(it.purchase_unit))
         except pint.DimensionalityError:
             pass
     raise ValueError(
@@ -43,11 +54,14 @@ _translate_re = re.compile("|".join([re.escape(fr) for fr, to in data.translatio
 _translate_dict = dict(data.translations)
 
 
-def translate_unit(unit_string):
+def translate_unit(unit_string: str) -> str:
     return _translate_re.sub(lambda x: _translate_dict[x.group(0)], unit_string)
 
 
-def find_undefined_ingredients(menu, ingredient_types):
+def find_undefined_ingredients(
+    menu: Iterable[classes.MenuItem],
+    ingredient_types: dict[str, classes.IngredientType],
+) -> set[classes.Ingredient]:
     not_found = set()
     for menuitem in menu:
         ingredients = list(menuitem.dish.ingredients)
@@ -66,8 +80,11 @@ def find_undefined_ingredients(menu, ingredient_types):
     return not_found
 
 
-def make_shopping_list(menu, ingredient_types):
-    shopping_list = classes.NameDict()
+def make_shopping_list(
+    menu: Iterable[classes.MenuItem],
+    ingredient_types: dict[str, classes.IngredientType],
+) -> list[classes.ShoppingListEntry]:
+    shopping_list = classes.NameDict[classes.ShoppingListEntry]()
     for menuitem in menu:
         ingredients = list(zip(menuitem.dish.ingredients, itertools.repeat(1)))
         for variant, count in menuitem.variants.items():
@@ -76,23 +93,31 @@ def make_shopping_list(menu, ingredient_types):
             )
         for ingredient, count in ingredients:
             pu = to_purchase_unit(ingredient, ingredient_types)
-            if not pu is None:
+            if pu is not None:
                 pu *= count
 
             entry = shopping_list.get(ingredient.name)
             if entry:
-                if not pu is None:
-                    entry.quantity += pu
+                if pu is not None:
+                    entry.quantity = entry.quantity + pu
                     entry.sources.append(menuitem)
             else:
-                entry = classes.Ingredient(ingredient_types[ingredient.name])
-                entry.quantity = pu
-                entry.sources = [menuitem]
+                ingredient_type = ingredient_types[ingredient.name]
+                entry = classes.ShoppingListEntry(
+                    name=ingredient.name,
+                    category=ingredient_type.category,
+                    quantity=pu,
+                    sources=[menuitem],
+                )
                 shopping_list.append(entry)
     return list(shopping_list.values())
 
 
-def subtract_from_shopping_list(shopping_list, sub, ingredient_types):
+def subtract_from_shopping_list(
+    shopping_list: Iterable[classes.ShoppingListEntry],
+    sub: Iterable[classes.Ingredient],
+    ingredient_types: dict[str, classes.IngredientType],
+):
     subd = classes.NameDict(sub)
     for ingredient in shopping_list:
         sub_ingredient = subd.get(ingredient.name, None)
@@ -100,15 +125,17 @@ def subtract_from_shopping_list(shopping_list, sub, ingredient_types):
             yield ingredient
         else:
             # Copy
-            ing = classes.Ingredient(ingredient)
+            ing: classes.ShoppingListEntry = copy(ingredient)
             pu = to_purchase_unit(sub_ingredient, ingredient_types)
-            ing.quantity -= pu
+            ing.quantity -= pu  # type: ignore
             if ing.quantity and ing.quantity.magnitude > 0:
                 yield ing
 
 
-def order_by_category(shopping_list):
-    cats = {}
+def order_by_category(
+    shopping_list: Iterable[classes.ShoppingListEntry],
+) -> Iterator[tuple[str, list[classes.ShoppingListEntry]]]:
+    cats: dict[str, list[classes.ShoppingListEntry]] = {}
     for item in shopping_list:
         cats.setdefault(item.category, []).append(item)
 
@@ -116,7 +143,7 @@ def order_by_category(shopping_list):
         yield x
 
 
-def scaled_dish(dish, factor):
+def scaled_dish(dish: classes.Dish, factor: float) -> classes.Dish:
     return classes.Dish(
         name=dish.name,
         variants=dish.variants,
@@ -133,7 +160,9 @@ def scaled_dish(dish, factor):
     )
 
 
-def scaled_menu(menu, factor):
+def scaled_menu(
+    menu: list[classes.MenuItem], factor: float
+) -> Iterator[classes.MenuItem]:
     for item in menu:
         d = item.__dict__.copy()
         d["dish"] = scaled_dish(d["dish"], factor)
