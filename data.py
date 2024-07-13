@@ -1,541 +1,857 @@
 # -*- coding: utf-8 -*-
 
-from pint import UnitRegistry, quantity
-from datetime import datetime
+from pint import UnitRegistry
 
 from classes import Ingredient, Dish, MenuItem, NameDict
 
 units = UnitRegistry()
 
-ingredient_types = NameDict([
-    Ingredient(name=u"Oliver, svarta", purchase_unit=units.kilograms, category=u"burk",
-               conversions=[657 * units.kilograms / units.meter**3]),
-    Ingredient(name=u"Olja, oliv",     purchase_unit=units.liter,     category=u"burk"),
-    Ingredient(name=u"Olja, raps",     purchase_unit=units.liter,     category=u"burk"),
-    Ingredient(name=u"Krossade tomater",purchase_unit=units.kilograms, category=u"burk"),
-    Ingredient(name=u"Matlagningsvin, vitt",purchase_unit=units.litres, category=u"burk"),
-    Ingredient(name=u"Tomatpuré",      purchase_unit=units.kilograms,  category=u"burk",
-               conversions=[1 * units.cups / (8*units.ounces)]),
-    Ingredient(name=u"Fransk senap",   purchase_unit=units.grams, category=u"burk",
-               conversions=[8.47 * units.ounce / (1*units.cups)]),
-    Ingredient(name=u"Ketchup",        purchase_unit=units.count, category=u"burk"),
-    Ingredient(name=u"Sambal oelek",   purchase_unit=units.grams, category=u"burk",
-               conversions=[1 * units.cups / (8*units.ounces)]),
-    Ingredient(name=u"Soya, kinesisk", purchase_unit=units.liter,     category=u"burk"),
-    Ingredient(name=u"Majonäs, burk",  purchase_unit=units.count,     category=u"burk"),
-    Ingredient(name=u"Valnötter",      purchase_unit=units.kilograms, category=u"torr",
-               conversions=[1.1 * units.kilograms / (15 * units.deciliters)]),
-    Ingredient(name=u"Salt",           purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Peppar, svart",  purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Peppar, svart, hel",purchase_unit=None,         category=u"krydd"),
-    Ingredient(name=u"Basilika",       purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Oregano",        purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Timjan",         purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Curry",          purchase_unit=units.deciliters,category=u"krydd"),
-    
-    Ingredient(name=u"Salt, grov",     purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u"Buljongtärning, fisk", purchase_unit=units.count, category=u"krydd"),
-    Ingredient(name=u"Buljongtärning, höns", purchase_unit=units.count, category=u"krydd"),
-    Ingredient(name=u"Buljongtärning, kött", purchase_unit=units.count, category=u"krydd"),
-    Ingredient(name=u"Buljongtärning, grönsak", purchase_unit=units.count, category=u"krydd"),
-    Ingredient(name=u"Pasta, skruvar", purchase_unit=units.kilograms, category=u"torr"),
-    Ingredient(name=u"Socker",         purchase_unit=units.kilograms, category=u"torr",
-               conversions=[1 * units.deciliters / (88 * units.grams)]),
-    Ingredient(name=u"Ris, parboiled", purchase_unit=units.kilograms, category=u"torr",
-               conversions=[0.9 * units.grams / units.cm**3]),
-    Ingredient(name=u"Vitlöksklyftor", purchase_unit=units.grams, category=u"grönt",
-               conversions=[6 * units.grams / units.count]),
-    Ingredient(name=u"Apelsiner",      purchase_unit=units.kilograms, category=u"grönt",
-               conversions=[200 * units.grams / units.count]),
-    Ingredient(name=u"Fänkål",         purchase_unit=units.kilograms, category=u"grönt"),
-    Ingredient(name=u"Lök, gul",        purchase_unit=units.kilograms, category=u"grönt",
-               conversions=[100 * units.grams / units.count]),
-    Ingredient(name=u"Morötter",       purchase_unit=units.kilograms, category=u"grönt",
-               conversions=[70 * units.grams / units.count]),
-    Ingredient(name=u"Rotselleri",     purchase_unit=units.count,     category=u"grönt"),
-    Ingredient(name=u"Palsternacka",   purchase_unit=units.gram,      category=u"grönt"),
-    Ingredient(name=u"Purjolök",       purchase_unit=units.gram,      category=u"grönt"),
+ingredient_types = NameDict(
+    [
+        Ingredient(
+            name="Oliver, svarta",
+            purchase_unit=units.kilograms,
+            category="burk",
+            conversions=[657 * units.kilograms / units.meter**3],
+        ),
+        Ingredient(name="Olja, oliv", purchase_unit=units.liter, category="burk"),
+        Ingredient(name="Olja, raps", purchase_unit=units.liter, category="burk"),
+        Ingredient(
+            name="Krossade tomater", purchase_unit=units.kilograms, category="burk"
+        ),
+        Ingredient(
+            name="Matlagningsvin, vitt", purchase_unit=units.litres, category="burk"
+        ),
+        Ingredient(
+            name="Tomatpuré",
+            purchase_unit=units.kilograms,
+            category="burk",
+            conversions=[1 * units.cups / (8 * units.ounces)],
+        ),
+        Ingredient(
+            name="Fransk senap",
+            purchase_unit=units.grams,
+            category="burk",
+            conversions=[8.47 * units.ounce / (1 * units.cups)],
+        ),
+        Ingredient(name="Ketchup", purchase_unit=units.count, category="burk"),
+        Ingredient(
+            name="Sambal oelek",
+            purchase_unit=units.grams,
+            category="burk",
+            conversions=[1 * units.cups / (8 * units.ounces)],
+        ),
+        Ingredient(name="Soya, kinesisk", purchase_unit=units.liter, category="burk"),
+        Ingredient(name="Majonäs, burk", purchase_unit=units.count, category="burk"),
+        Ingredient(
+            name="Valnötter",
+            purchase_unit=units.kilograms,
+            category="torr",
+            conversions=[1.1 * units.kilograms / (15 * units.deciliters)],
+        ),
+        Ingredient(name="Salt", purchase_unit=None, category="krydd"),
+        Ingredient(name="Peppar, svart", purchase_unit=None, category="krydd"),
+        Ingredient(name="Peppar, svart, hel", purchase_unit=None, category="krydd"),
+        Ingredient(name="Basilika", purchase_unit=None, category="krydd"),
+        Ingredient(name="Oregano", purchase_unit=None, category="krydd"),
+        Ingredient(name="Timjan", purchase_unit=None, category="krydd"),
+        Ingredient(name="Curry", purchase_unit=units.deciliters, category="krydd"),
+        Ingredient(name="Salt, grov", purchase_unit=None, category="krydd"),
+        Ingredient(
+            name="Buljongtärning, fisk", purchase_unit=units.count, category="krydd"
+        ),
+        Ingredient(
+            name="Buljongtärning, höns", purchase_unit=units.count, category="krydd"
+        ),
+        Ingredient(
+            name="Buljongtärning, kött", purchase_unit=units.count, category="krydd"
+        ),
+        Ingredient(
+            name="Buljongtärning, grönsak", purchase_unit=units.count, category="krydd"
+        ),
+        Ingredient(
+            name="Pasta, skruvar", purchase_unit=units.kilograms, category="torr"
+        ),
+        Ingredient(
+            name="Socker",
+            purchase_unit=units.kilograms,
+            category="torr",
+            conversions=[1 * units.deciliters / (88 * units.grams)],
+        ),
+        Ingredient(
+            name="Ris, parboiled",
+            purchase_unit=units.kilograms,
+            category="torr",
+            conversions=[0.9 * units.grams / units.cm**3],
+        ),
+        Ingredient(
+            name="Vitlöksklyftor",
+            purchase_unit=units.grams,
+            category="grönt",
+            conversions=[6 * units.grams / units.count],
+        ),
+        Ingredient(
+            name="Apelsiner",
+            purchase_unit=units.kilograms,
+            category="grönt",
+            conversions=[200 * units.grams / units.count],
+        ),
+        Ingredient(name="Fänkål", purchase_unit=units.kilograms, category="grönt"),
+        Ingredient(
+            name="Lök, gul",
+            purchase_unit=units.kilograms,
+            category="grönt",
+            conversions=[100 * units.grams / units.count],
+        ),
+        Ingredient(
+            name="Morötter",
+            purchase_unit=units.kilograms,
+            category="grönt",
+            conversions=[70 * units.grams / units.count],
+        ),
+        Ingredient(name="Rotselleri", purchase_unit=units.count, category="grönt"),
+        Ingredient(name="Palsternacka", purchase_unit=units.gram, category="grönt"),
+        Ingredient(name="Purjolök", purchase_unit=units.gram, category="grönt"),
+        Ingredient(name="Potatis", purchase_unit=units.kilograms, category="grönt"),
+        Ingredient(
+            name="Dill, färsk, planta/motsv",
+            purchase_unit=units.count,
+            category="grönt",
+        ),
+        Ingredient(name="Ingefära, färsk", purchase_unit=units.grams, category="grönt"),
+        Ingredient(name="Salladshuvud", purchase_unit=units.count, category="grönt"),
+        Ingredient(
+            name="Tomater",
+            purchase_unit=units.kilograms,
+            category="grönt",
+            conversions=[115 * units.grams / units.count],
+        ),
+        Ingredient(name="Chili, grön", purchase_unit=units.count, category="grönt"),
+        Ingredient(name="Kycklingfilé", purchase_unit=units.kilograms, category="frys"),
+        Ingredient(name="Broccoli", purchase_unit=units.kilograms, category="frys"),
+        Ingredient(name="Persilja, fryst", purchase_unit=units.count, category="frys"),
+        Ingredient(name="Fetaost", purchase_unit=units.kilograms, category="mejeri"),
+        Ingredient(name="Mjölk", purchase_unit=units.liters, category="mejeri"),
+        Ingredient(name="Gräddfil", purchase_unit=units.liters, category="mejeri"),
+        Ingredient(
+            name="Gräddfil, laktosfri", purchase_unit=units.liters, category="mejeri"
+        ),
+        Ingredient(name="Creme Fraiche", purchase_unit=units.liters, category="mejeri"),
+        Ingredient(name="Köttfärs, nöt", purchase_unit=units.kilograms, category="kyl"),
+        Ingredient(name="Falukorv", purchase_unit=units.kilograms, category="kyl"),
+        Ingredient(name="Chilipulver, röd", purchase_unit=None, category="krydd"),
+        Ingredient(
+            name="Gurka",
+            purchase_unit=units.kilograms,
+            category="grönt",
+            conversions=[463 * units.grams / units.count],
+        ),
+        Ingredient(name="Koriander, malen", purchase_unit=None, category="krydd"),
+        Ingredient(
+            name="Vetemjöl",
+            purchase_unit=units.kilograms,
+            category="torr",
+            conversions=[60 * units.grams / units.deciliters],
+        ),
+        Ingredient(
+            name="Kidneybönor, avrunnen vikt",
+            purchase_unit=units.kilogram,
+            category="torr",
+        ),
+        Ingredient(
+            name="Koriander, färsk", purchase_unit=units.count, category="grönt"
+        ),
+        Ingredient(name="Persilja, färsk", purchase_unit=units.count, category="grönt"),
+        Ingredient(name="Gurkmeja", purchase_unit=None, category="krydd"),
+        Ingredient(
+            name="Vinbärsaft, outspädd, bra (typ Önos)",
+            purchase_unit=units.liter,
+            category="burk",
+        ),
+        Ingredient(
+            name="Kikärtor, avrunnen vikt",
+            purchase_unit=units.kilogram,
+            category="torr",
+        ),
+        Ingredient(name="Porter", purchase_unit=units.liter, category="burk"),
+        Ingredient(name="Citroner", purchase_unit=units.count, category="grönt"),
+        Ingredient(name="Enbär, torkade", purchase_unit=units.gram, category="krydd"),
+        Ingredient(name="Grädde", purchase_unit=units.liter, category="mejeri"),
+        Ingredient(name="Spiskummin", purchase_unit=None, category="krydd"),
+        Ingredient(name="Högrev, benfri", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(name="Kassler", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(
+            name="Vinäger, vitvins", purchase_unit=units.liters, category="burk"
+        ),
+        Ingredient(
+            name="Lök, röd",
+            purchase_unit=units.kilogram,
+            category="grönt",
+            conversions=[100 * units.grams / units.count],
+        ),
+        Ingredient(name="Rädisor, knippe", purchase_unit=units.count, category="grönt"),
+        Ingredient(name="Prinskorvar", purchase_unit=units.count, category="kyl"),
+        Ingredient(
+            name="Sill, burk, blandat", purchase_unit=units.count, category="kyl"
+        ),
+        Ingredient(
+            name="Knäckebröd, skivor",
+            purchase_unit=units.count,
+            category="torr",
+            conversions=[17 * units.grams / units.count],
+        ),
+        Ingredient(name="Ägg", purchase_unit=units.count, category="kyl"),
+        Ingredient(name="Köttbullar", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(name="Bacon", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(name="Paprika, röd", purchase_unit=units.kilogram, category="grönt"),
+        Ingredient(name="Paprikapulver", purchase_unit=None, category="krydd"),
+        Ingredient(
+            name="Bröd, ljust, skivor", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(name="Grytkött", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(name="Kolbasz", purchase_unit=units.kilogram, category="kyl"),
+        Ingredient(
+            name="Rödbetor till pytt-i-panna, portioner",
+            purchase_unit=units.count,
+            category="burk",
+        ),
+        Ingredient(
+            name="Pytt i panna, portioner", purchase_unit=units.count, category="frys"
+        ),
+        Ingredient(
+            name="Pytt i panna, vegetarisk, portioner",
+            purchase_unit=units.count,
+            category="frys",
+        ),
+        Ingredient(
+            name="Grädde, laktosfri", purchase_unit=units.liter, category="mejeri"
+        ),
+        Ingredient(
+            name="Grädde, mjölkfri", purchase_unit=units.liter, category="mejeri"
+        ),
+        Ingredient(
+            name="Creme Fraiche, laktosfri",
+            purchase_unit=units.liter,
+            category="mejeri",
+        ),
+        Ingredient(
+            name="Pasta, glutenfri, portioner",
+            purchase_unit=units.count,
+            category="torr",
+        ),
+        Ingredient(
+            name="Mjölk, laktosfri", purchase_unit=units.liter, category="mejeri"
+        ),
+        Ingredient(name="Tofu, portioner", purchase_unit=units.count, category="kyl"),
+        Ingredient(name="Quornburgare", purchase_unit=units.count, category="frys"),
+        Ingredient(name="Quornfiléer", purchase_unit=units.count, category="frys"),
+        Ingredient(
+            name="Sojakorvar, Hälsans kök", purchase_unit=units.count, category="frys"
+        ),
+        Ingredient(name="Kaffe", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(
+            name="Diskmedel, flaska", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(name="Rotsaksborste", purchase_unit=units.count, category="torr"),
+        Ingredient(name="Brödbakningsmix", purchase_unit=units.count, category="torr"),
+        Ingredient(
+            name="Plastfilm, typ gladpack", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(
+            name="Sopsäckar, stora, rullar", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(name="Kaffefilter 1X4", purchase_unit=units.count, category="torr"),
+        Ingredient(
+            name="Soppåsar mindre, rullar", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(
+            name="Hushållspapper, rullar", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(
+            name="Plastpåsar, 3L, paket", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(name="Filmjölk", purchase_unit=units.liter, category="mejeri"),
+        Ingredient(
+            name="Korvpålägg, skivor", purchase_unit=units.count, category="kyl"
+        ),
+        Ingredient(
+            name="Köttpålägg, skivor", purchase_unit=units.count, category="kyl"
+        ),
+        Ingredient(name="Cornflakes", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(name="Jordgubbssylt", purchase_unit=units.kilogram, category="burk"),
+        Ingredient(name="Digestivekex", purchase_unit=units.count, category="torr"),
+        Ingredient(
+            name="Josextrakt, äpple (måttet är för färdigblandad jos)",
+            purchase_unit=units.liter,
+            category="burk",
+        ),
+        Ingredient(
+            name="Havregryn (bara)", purchase_unit=units.kilogram, category="torr"
+        ),
+        Ingredient(
+            name="Josextrakt, apelsin (måttet är för färdigblandad jos)",
+            purchase_unit=units.liter,
+            category="burk",
+        ),
+        Ingredient(
+            name="Kakmix, chokladkaka", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(name="Marmelad", purchase_unit=units.kilogram, category="burk"),
+        Ingredient(name="Russin", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(
+            name="Ljust bröd (typ polar), skivor",
+            purchase_unit=units.count,
+            category="torr",
+        ),
+        Ingredient(name="Äppelmos", purchase_unit=units.kilogram, category="burk"),
+        Ingredient(
+            name="Mörkt bröd, skivor", purchase_unit=units.count, category="torr"
+        ),
+        Ingredient(
+            name="Frukt, blandad prisvärd",
+            purchase_unit=units.kilogram,
+            category="grönt",
+        ),
+        Ingredient(name="Mariekex", purchase_unit=units.count, category="torr"),
+        Ingredient(name="Müsli", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(
+            name="Paprika, valfri", purchase_unit=units.kilogram, category="grönt"
+        ),
+        Ingredient(name="Skorpor", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(name="Tepåsar", purchase_unit=units.count, category="torr"),
+        Ingredient(name="Kanel", purchase_unit=None, category="krydd"),
+        Ingredient(name="Bregott", purchase_unit=units.kilogram, category="mejeri"),
+        Ingredient(
+            name="Färdigrätt, åt Hannah H E", purchase_unit=units.count, category="frys"
+        ),
+        Ingredient(
+            name="Filmjölk, laktosfri", purchase_unit=units.liter, category="mejeri"
+        ),
+        Ingredient(
+            name="Yoghurt, laktosfri", purchase_unit=units.liter, category="mejeri"
+        ),
+        Ingredient(
+            name="Knäckebröd, glutenfritt, skivor",
+            purchase_unit=units.count,
+            category="torr",
+        ),
+        Ingredient(name="Pasta, Penne", purchase_unit=units.kilogram, category="torr"),
+        Ingredient(name="Cirtronjuice", purchase_unit=units.deciliter, category="burk"),
+        Ingredient(name="Lax", purchase_unit=units.gram, category="kyl"),
+        Ingredient(name="Fisk (kolja, sej)", purchase_unit=units.gram, category="frys"),
+        Ingredient(
+            name="Ris, basmati",
+            purchase_unit=units.kilograms,
+            category="torr",
+            conversions=[0.9 * units.grams / units.cm**3],
+        ),
+        Ingredient(
+            name="Sojamjölk",
+            purchase_unit=units.liters,
+            category="mejeri",
+        ),
+        Ingredient(
+            name="Hollandaise, mjölkfri",
+            purchase_unit=units.grams,
+            category="kyl",
+        ),
+        Ingredient(
+            name="Mjölkfri Creme Fraiche",
+            purchase_unit=units.milliliters,
+            category="mejeri",
+        ),
+        Ingredient(
+            name="Riktigt jävla smör", purchase_unit=units.grams, category="mejeri"
+        ),
+        Ingredient(name="Sojamjölk", purchase_unit=units.liters, category="mejeri"),
+        Ingredient(name="Maizena, ej ljus/mörk", purchase_unit=None, category="torr"),
+        Ingredient(name="Ost mild", purchase_unit=units.kilogram, category="mejeri"),
+        Ingredient(
+            name="Ost med smak", purchase_unit=units.kilogram, category="mejeri"
+        ),
+        Ingredient(
+            name="Vegetarisk ärtsoppa burk", purchase_unit=units.count, category="burk"
+        ),
+        Ingredient(name="Sirap, ljus", purchase_unit=units.grams, category="burk"),
+    ]
+)
 
-    Ingredient(name=u"Potatis",        purchase_unit=units.kilograms, category=u"grönt"),
-    Ingredient(name=u"Dill, färsk, planta/motsv",    purchase_unit=units.count,            category=u"grönt"),
-    Ingredient(name=u'Ingefära, färsk',purchase_unit=units.grams,     category=u"grönt"),
-    Ingredient(name=u'Salladshuvud',   purchase_unit=units.count,     category=u"grönt"),
-    Ingredient(name=u'Tomater',        purchase_unit=units.kilograms, category=u"grönt",
-               conversions=[115 * units.grams / units.count]),
-    Ingredient(name=u'Chili, grön',    purchase_unit=units.count,     category=u"grönt"),
-    Ingredient(name=u"Kycklingfilé",   purchase_unit=units.kilograms, category=u"frys"),
-    Ingredient(name=u"Broccoli",       purchase_unit=units.kilograms, category=u"frys"),
-    Ingredient(name=u"Persilja, fryst",purchase_unit=units.count,     category=u"frys"),
-    Ingredient(name=u"Fetaost",        purchase_unit=units.kilograms, category=u"mejeri"),
-    Ingredient(name=u"Mjölk",          purchase_unit=units.liters,    category=u"mejeri"),
-    Ingredient(name=u"Gräddfil",       purchase_unit=units.liters,    category=u"mejeri"),
-    Ingredient(name=u"Gräddfil, laktosfri",       purchase_unit=units.liters,    category=u"mejeri"),
-    Ingredient(name=u"Creme Fraiche",          purchase_unit=units.liters,    category=u"mejeri"),
-    Ingredient(name=u"Köttfärs, nöt",  purchase_unit=units.kilograms, category=u"kyl"),
-    Ingredient(name=u"Falukorv",       purchase_unit=units.kilograms, category=u"kyl"),
-
-    Ingredient(name=u'Chilipulver, röd',purchase_unit=None,           category=u"krydd"),
-    Ingredient(name=u'Gurka',          purchase_unit=units.kilograms,     category=u"grönt",
-               conversions=[463 * units.grams/ units.count]),
-    Ingredient(name=u'Koriander, malen',purchase_unit=None,           category=u"krydd"),
-    Ingredient(name=u'Vetemjöl',       purchase_unit=units.kilograms, category=u"torr",
-               conversions=[60 * units.grams / units.deciliters]),
-    Ingredient(name=u'Kidneybönor, avrunnen vikt',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Koriander, färsk',purchase_unit=units.count,    category=u"grönt"),
-    Ingredient(name=u'Persilja, färsk',purchase_unit=units.count,    category=u"grönt"),
-    
-    Ingredient(name=u'Gurkmeja',       purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u'Vinbärsaft, outspädd, bra (typ Önos)',purchase_unit=units.liter, category=u"burk"),
-    Ingredient(name=u'Kikärtor, avrunnen vikt',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Porter',         purchase_unit=units.liter,     category=u"burk"),
-    Ingredient(name=u'Citroner',       purchase_unit=units.count,     category=u"grönt"),
-    Ingredient(name=u'Enbär, torkade', purchase_unit=units.gram,      category=u"krydd"),
-    Ingredient(name=u'Grädde',         purchase_unit=units.liter,     category=u"mejeri"),
-    Ingredient(name=u'Spiskummin',     purchase_unit=None,            category=u"krydd"),
-    Ingredient(name=u'Högrev, benfri',purchase_unit=units.kilogram,category=u"kyl"),
-
-    Ingredient(name=u'Kassler',        purchase_unit=units.kilogram,  category=u"kyl"),
-    Ingredient(name=u'Vinäger, vitvins',purchase_unit=units.liters, category=u"burk"),
-    Ingredient(name=u'Lök, röd',purchase_unit=units.kilogram,            category=u"grönt",
-               conversions=[100 * units.grams / units.count]),
-    Ingredient(name=u'Rädisor, knippe',purchase_unit=units.count, category=u"grönt"),
-
-    Ingredient(name=u'Prinskorvar',    purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Sill, burk, blandat',purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Knäckebröd, skivor',purchase_unit=units.count, category=u"torr",
-               conversions=[17 * units.grams / units.count]),
-    Ingredient(name=u'Ägg',            purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Köttbullar',     purchase_unit=units.kilogram, category=u"kyl"),
-    Ingredient(name=u'Bacon',          purchase_unit=units.kilogram, category=u"kyl"),
-
-    Ingredient(name=u'Paprika, röd',purchase_unit=units.kilogram, category=u"grönt"),
-    Ingredient(name=u'Paprikapulver',  purchase_unit=None,           category=u"krydd"),
-    Ingredient(name=u'Bröd, ljust, skivor',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Grytkött',purchase_unit=units.kilogram, category=u"kyl"),
-    Ingredient(name=u'Kolbasz',purchase_unit=units.kilogram, category=u"kyl"),
-    Ingredient(name=u'Rödbetor till pytt-i-panna, portioner',purchase_unit=units.count, category=u"burk"),
-    Ingredient(name=u'Pytt i panna, portioner',purchase_unit=units.count, category=u"frys"),
-    Ingredient(name=u'Pytt i panna, vegetarisk, portioner',purchase_unit=units.count, category=u"frys"),
-
-    Ingredient(name=u'Grädde, laktosfri',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Grädde, mjölkfri',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Creme Fraiche, laktosfri',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Pasta, glutenfri, portioner',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Mjölk, laktosfri',purchase_unit=units.liter, category=u"mejeri"),
-
-    Ingredient(name=u'Tofu, portioner',purchase_unit=units.count, category=u"kyl"),
-
-    Ingredient(name=u'Quornburgare',purchase_unit=units.count, category=u"frys"),
-    Ingredient(name=u'Quornfiléer',purchase_unit=units.count, category=u"frys"),
-    Ingredient(name=u'Sojakorvar, Hälsans kök',purchase_unit=units.count, category=u"frys"),
-
-    Ingredient(name=u'Kaffe',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Diskmedel, flaska',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Rotsaksborste',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Brödbakningsmix',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Plastfilm, typ gladpack',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Sopsäckar, stora, rullar',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Kaffefilter 1X4',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Soppåsar mindre, rullar',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Hushållspapper, rullar',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Plastpåsar, 3L, paket',purchase_unit=units.count, category=u"torr"),
-
-    Ingredient(name=u'Filmjölk',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Korvpålägg, skivor',purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Köttpålägg, skivor',purchase_unit=units.count, category=u"kyl"),
-    Ingredient(name=u'Cornflakes',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Jordgubbssylt',purchase_unit=units.kilogram, category=u"burk"),
-    Ingredient(name=u'Digestivekex',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Josextrakt, äpple (måttet är för färdigblandad jos)',purchase_unit=units.liter, category=u"burk"),
-    Ingredient(name=u'Havregryn (bara)',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Josextrakt, apelsin (måttet är för färdigblandad jos)',purchase_unit=units.liter, category=u"burk"),
-    Ingredient(name=u'Kakmix, chokladkaka',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Marmelad',purchase_unit=units.kilogram, category=u"burk"),
-    Ingredient(name=u'Russin',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Ljust bröd (typ polar), skivor',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Äppelmos',purchase_unit=units.kilogram, category=u"burk"),
-    Ingredient(name=u'Mörkt bröd, skivor',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Frukt, blandad prisvärd',purchase_unit=units.kilogram, category=u"grönt"),
-    Ingredient(name=u'Mariekex',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Müsli',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Paprika, valfri',purchase_unit=units.kilogram, category=u"grönt"),
-    Ingredient(name=u'Skorpor',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Tepåsar',purchase_unit=units.count, category=u"torr"),
-    Ingredient(name=u'Kanel',purchase_unit=None, category=u"krydd"),
-    Ingredient(name=u'Bregott',purchase_unit=units.kilogram, category=u"mejeri"),
-    
-    Ingredient(name=u"Färdigrätt, åt Hannah H E", purchase_unit=units.count, category=u"frys"),
-
-    Ingredient(name=u'Filmjölk, laktosfri',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Yoghurt, laktosfri',purchase_unit=units.liter, category=u"mejeri"),
-    Ingredient(name=u'Knäckebröd, glutenfritt, skivor',purchase_unit=units.count, category=u"torr"),
-
-    Ingredient(name=u'Pasta, Penne',purchase_unit=units.kilogram, category=u"torr"),
-    Ingredient(name=u'Cirtronjuice',purchase_unit=units.deciliter, category=u"burk"),
-    Ingredient(name=u'Lax',purchase_unit=units.gram, category=u"kyl"),
-
-    Ingredient(name=u"Fisk (kolja, sej)",purchase_unit=units.gram, category=u"frys"),
-
-    Ingredient(name=u"Ris, basmati", purchase_unit=units.kilograms, category=u"torr",
-               conversions=[0.9 * units.grams / units.cm**3]),
-    Ingredient(name=u"Sojamjölk", purchase_unit=units.liters, category=u"mejeri",),
-    Ingredient(name=u"Hollandaise, mjölkfri", purchase_unit=units.grams, category=u"kyl",),
-    Ingredient(name=u"Mjölkfri Creme Fraiche", purchase_unit=units.milliliters, category=u"mejeri"),
-    Ingredient(name=u"Riktigt jävla smör", purchase_unit=units.grams, category=u"mejeri"),
-    Ingredient(name=u"Sojamjölk", purchase_unit=units.liters, category=u"mejeri"),
-    Ingredient(name=u"Maizena, ej ljus/mörk", purchase_unit=None, category=u"torr"),
-    Ingredient(name=u"Ost mild", purchase_unit=units.kilogram, category=u"mejeri"),
-    Ingredient(name=u"Ost med smak", purchase_unit=units.kilogram, category=u"mejeri"),
-    Ingredient(name=u"Vegetarisk ärtsoppa burk", purchase_unit=units.count, category=u"burk"),
-    Ingredient(name=u"Sirap, ljus", purchase_unit=units.grams, category=u"burk"),
-])
-
-dishes = NameDict([
-    Dish(name=u"Fänkål och kycklingsallad", ingredients=[
-                Ingredient(name=u"Fänkål",         quantity=7.2 * units.kilograms),
-                Ingredient(name=u"Kycklingfilé",   quantity=3.6 * units.kilograms),
-                Ingredient(name=u"Fetaost",        quantity=2.2 * units.kilograms),
-                Ingredient(name=u"Valnötter",      quantity=15 * units.deciliters),
-                Ingredient(name=u"Oliver, svarta", quantity=15 * units.deciliters),
-                Ingredient(name=u"Apelsiner",      quantity=18 * units.count),
-                Ingredient(name=u"Cirtronjuice",   quantity=7 * units.deciliters),
-                Ingredient(name=u"Olja, oliv",     quantity=6 * units.deciliters),
-                Ingredient(name=u"Salt",           quantity=None),
-                Ingredient(name=u"Peppar, svart",  quantity=None)
-                ], variants={
+dishes = NameDict(
+    [
+        Dish(
+            name="Fänkål och kycklingsallad",
+            ingredients=[
+                Ingredient(name="Fänkål", quantity=7.2 * units.kilograms),
+                Ingredient(name="Kycklingfilé", quantity=3.6 * units.kilograms),
+                Ingredient(name="Fetaost", quantity=2.2 * units.kilograms),
+                Ingredient(name="Valnötter", quantity=15 * units.deciliters),
+                Ingredient(name="Oliver, svarta", quantity=15 * units.deciliters),
+                Ingredient(name="Apelsiner", quantity=18 * units.count),
+                Ingredient(name="Cirtronjuice", quantity=7 * units.deciliters),
+                Ingredient(name="Olja, oliv", quantity=6 * units.deciliters),
+                Ingredient(name="Salt", quantity=None),
+                Ingredient(name="Peppar, svart", quantity=None),
+            ],
+            variants={
+                "vegetarian": [Ingredient(name="Quornfiléer", quantity=1 * units.count)]
+            },
+        ),
+        Dish(
+            name="Kycklinggryta med fetaost",
+            ingredients=[
+                Ingredient(name="Olja, raps", quantity=1.6 * units.deciliters),
+                Ingredient(name="Vitlöksklyftor", quantity=8 * units.count),
+                Ingredient(name="Kycklingfilé", quantity=5 * units.kilogram),
+                Ingredient(name="Krossade tomater", quantity=24 * 400 * units.gram),
+                Ingredient(name="Buljongtärning, höns", quantity=16 * units.count),
+                Ingredient(name="Matlagningsvin, vitt", quantity=12 * units.deciliters),
+                Ingredient(name="Peppar, svart", quantity=None),
+                Ingredient(name="Broccoli", quantity=2 * units.kilogram),
+                Ingredient(name="Fetaost", quantity=1.6 * units.kilogram),
+                Ingredient(name="Basilika", quantity=None),
+                Ingredient(name="Salt", quantity=None),
+                Ingredient(name="Pasta, Penne", quantity=5 * units.kilogram),
+            ],
+            variants={
                 "vegetarian": [
-                    Ingredient(name=u"Quornfiléer", quantity=1*units.count)
-                    ]
-                }),
-    Dish(name=u"Kycklinggryta med fetaost", ingredients=[
-                Ingredient(name=u"Olja, raps",           quantity=1.6 * units.deciliters),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=8 * units.count),
-                Ingredient(name=u"Kycklingfilé",         quantity=5 * units.kilogram),
-                Ingredient(name=u"Krossade tomater",     quantity=24*400*units.gram),
-                Ingredient(name=u"Buljongtärning, höns", quantity=16 * units.count),
-                Ingredient(name=u"Matlagningsvin, vitt", quantity=12 * units.deciliters),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Broccoli",             quantity=2 * units.kilogram),
-                Ingredient(name=u"Fetaost",              quantity=1.6 * units.kilogram),
-                Ingredient(name=u"Basilika",             quantity=None),
-                Ingredient(name=u"Salt",                 quantity=None),
-                Ingredient(name=u"Pasta, Penne",         quantity=5 * units.kilogram),
-                ], variants={
-                u"vegetarian": [
-                    Ingredient(name=u"Quornfiléer", quantity=2*units.count),
-                    Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count)
-                    ],
-                u"glutenfri": [
-                    Ingredient(name=u"Pasta, glutenfri, portioner", quantity=1*units.count)
-                    ],
-                u"mjölkfri": [],
-                u"laktosfri": [],
-                }),
-    Dish(name=u"Pasta & köttfärssås", ingredients=[
-                Ingredient(name=u"Lök, gul",              quantity=15 * units.count),
-                Ingredient(name=u"Morötter",             quantity=15 * units.count),
-                Ingredient(name=u"Rotselleri",           quantity=3 * units.count),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=10 * units.count),
-                Ingredient(name=u"Köttfärs, nöt",        quantity=5 * units.kilogram),
-                Ingredient(name=u"Buljongtärning, kött", quantity=6 * units.count),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Oregano",              quantity=None),
-                Ingredient(name=u"Timjan",               quantity=None),
-                Ingredient(name=u"Basilika",             quantity=None),
-                Ingredient(name=u"Krossade tomater",     quantity=20*400*units.gram),
-                Ingredient(name=u"Tomatpuré",            quantity=3*units.deciliters),
-                Ingredient(name=u"Pasta, skruvar",       quantity=5*units.kilograms),                
-                ], variants={
+                    Ingredient(name="Quornfiléer", quantity=2 * units.count),
+                    Ingredient(
+                        name="Buljongtärning, grönsak", quantity=0.5 * units.count
+                    ),
+                ],
                 "glutenfri": [
-                    Ingredient(name=u"Pasta, glutenfri, portioner", quantity=1*units.count)
-                    ],
+                    Ingredient(
+                        name="Pasta, glutenfri, portioner", quantity=1 * units.count
+                    )
+                ],
+                "mjölkfri": [],
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Pasta & köttfärssås",
+            ingredients=[
+                Ingredient(name="Lök, gul", quantity=15 * units.count),
+                Ingredient(name="Morötter", quantity=15 * units.count),
+                Ingredient(name="Rotselleri", quantity=3 * units.count),
+                Ingredient(name="Vitlöksklyftor", quantity=10 * units.count),
+                Ingredient(name="Köttfärs, nöt", quantity=5 * units.kilogram),
+                Ingredient(name="Buljongtärning, kött", quantity=6 * units.count),
+                Ingredient(name="Peppar, svart", quantity=None),
+                Ingredient(name="Oregano", quantity=None),
+                Ingredient(name="Timjan", quantity=None),
+                Ingredient(name="Basilika", quantity=None),
+                Ingredient(name="Krossade tomater", quantity=20 * 400 * units.gram),
+                Ingredient(name="Tomatpuré", quantity=3 * units.deciliters),
+                Ingredient(name="Pasta, skruvar", quantity=5 * units.kilograms),
+            ],
+            variants={
+                "glutenfri": [
+                    Ingredient(
+                        name="Pasta, glutenfri, portioner", quantity=1 * units.count
+                    )
+                ],
                 "vegetarian": [
-                    Ingredient(name=u"Quornburgare", quantity=1*units.count),
-                    Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count)
-                    ],
-                }),
-    Dish(name=u"Korv stroganoff", ingredients=[
-                Ingredient(name=u"Falukorv",             quantity=5 * units.kilogram),
-                Ingredient(name=u"Lök, gul",              quantity=20 * units.count),
-                Ingredient(name=u"Tomatpuré",            quantity=6 * units.deciliters),
-                Ingredient(name=u"Fransk senap",         quantity=1.5 * units.deciliters),
-                Ingredient(name=u"Mjölk",                quantity=3 * units.liters),
-                Ingredient(name=u"Buljongtärning, grönsak", quantity=4 * units.count),
-                Ingredient(name=u"Creme Fraiche",  quantity=3 * units.liters),
-                Ingredient(name=u"Ketchup",              quantity=.5 * units.count),
-                Ingredient(name=u"Sambal oelek",         quantity=4 * units.tablespoons),
-                Ingredient(name=u"Socker",               quantity=4 * units.deciliters),
-                Ingredient(name=u"Soya, kinesisk",       quantity=3 * units.deciliters),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=1 * units.ounce),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Salt",                 quantity=None),
-                Ingredient(name=u"Timjan",               quantity=None),
-                Ingredient(name=u"Olja, raps",           quantity=1 * units.deciliters),
-                Ingredient(name=u"Ris, parboiled",       quantity=6 * units.liters),
-                ], variants={
+                    Ingredient(name="Quornburgare", quantity=1 * units.count),
+                    Ingredient(
+                        name="Buljongtärning, grönsak", quantity=0.5 * units.count
+                    ),
+                ],
+            },
+        ),
+        Dish(
+            name="Korv stroganoff",
+            ingredients=[
+                Ingredient(name="Falukorv", quantity=5 * units.kilogram),
+                Ingredient(name="Lök, gul", quantity=20 * units.count),
+                Ingredient(name="Tomatpuré", quantity=6 * units.deciliters),
+                Ingredient(name="Fransk senap", quantity=1.5 * units.deciliters),
+                Ingredient(name="Mjölk", quantity=3 * units.liters),
+                Ingredient(name="Buljongtärning, grönsak", quantity=4 * units.count),
+                Ingredient(name="Creme Fraiche", quantity=3 * units.liters),
+                Ingredient(name="Ketchup", quantity=0.5 * units.count),
+                Ingredient(name="Sambal oelek", quantity=4 * units.tablespoons),
+                Ingredient(name="Socker", quantity=4 * units.deciliters),
+                Ingredient(name="Soya, kinesisk", quantity=3 * units.deciliters),
+                Ingredient(name="Vitlöksklyftor", quantity=1 * units.ounce),
+                Ingredient(name="Peppar, svart", quantity=None),
+                Ingredient(name="Salt", quantity=None),
+                Ingredient(name="Timjan", quantity=None),
+                Ingredient(name="Olja, raps", quantity=1 * units.deciliters),
+                Ingredient(name="Ris, parboiled", quantity=6 * units.liters),
+            ],
+            variants={
                 "laktosfri": [
-                    Ingredient(name=u"Mjölk, laktosfri", quantity=1 * units.deciliters),
-                    Ingredient(name=u"Creme Fraiche, laktosfri", quantity=.5 * units.deciliters),
-                    ],
+                    Ingredient(name="Mjölk, laktosfri", quantity=1 * units.deciliters),
+                    Ingredient(
+                        name="Creme Fraiche, laktosfri", quantity=0.5 * units.deciliters
+                    ),
+                ],
                 "vegetarian": [
-                    Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count)
-                    ],
-                u"mjölkfri": [
-                    Ingredient(name=u"Sojamjölk", quantity=1 * units.deciliters),
-                    Ingredient(name=u"Mjölkfri Creme Fraiche", quantity=.5 * units.deciliters),
-                    ],
-                }),
-    Dish(name=u"Fisksoppa", ingredients=[
-                Ingredient(name=u"Fisk (kolja, sej)",    quantity=5.5 * units.kilograms),
-                Ingredient(name=u"Potatis",              quantity=3   * units.kilograms),
-                Ingredient(name=u"Morötter",             quantity=2   * units.kilograms),
-                Ingredient(name=u"Palsternacka",         quantity=1.2 * units.kilograms),
-                Ingredient(name=u"Buljongtärning, fisk", quantity=24  * units.count),
-                Ingredient(name=u"Socker",               quantity=1.5 * units.deciliters),
-                Ingredient(name=u"Purjolök",             quantity=2   * units.kilograms),
-                Ingredient(name=u"Vetemjöl",             quantity=2.5 * units.deciliters),
-                Ingredient(name=u"Persilja, färsk",      quantity=2   * units.count),
-                Ingredient(name=u"Curry",                quantity=0.5 * units.deciliters),
-                Ingredient(name=u"Salt, grov",           quantity=None),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Creme Fraiche",  quantity=2 * units.liters),
-                 ], variants={                
-                u"vegan": [
-                    Ingredient(name=u"Vegetarisk ärtsoppa burk", quantity=1 * units.count)
+                    Ingredient(name="Sojakorvar, Hälsans kök", quantity=4 * units.count)
                 ],
-                u"laktosfri": [
-                    Ingredient(name=u"Gräddfil, laktosfri", quantity=1 * units.deciliters)
-                    ],
-                u"vegetarian": [],
-                }),
-        Dish(name=u"Lax", ingredients=[
-                Ingredient(name=u"Salt, grov",           quantity=None),
-                Ingredient(name=u"Majonäs, burk",        quantity=2 * units.count),
-                Ingredient(name=u"Persilja, fryst",      quantity=1 * units.count),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                Ingredient(name=u"Timjan",               quantity=None),
-                Ingredient(name=u"Potatis",              quantity=16 * units.kilograms),
-                Ingredient(name=u"Dill, färsk, planta/motsv", quantity=4 * units.count),
-                Ingredient(name=u"Gräddfil",             quantity=3 * units.liters),                
-                Ingredient(name=u"Lax",                  quantity= 150 * 1.10 * 36 * units.gram),                
-                ], variants={
-                u"vegan": [
-                    Ingredient(name=u"Vegetarisk ärtsoppa burk", quantity=1 * units.count)
+                "mjölkfri": [
+                    Ingredient(name="Sojamjölk", quantity=1 * units.deciliters),
+                    Ingredient(
+                        name="Mjölkfri Creme Fraiche", quantity=0.5 * units.deciliters
+                    ),
                 ],
-                u"laktosfri": [
-                    Ingredient(name=u"Gräddfil, laktosfri", quantity=1 * units.deciliters)
-                    ],
-                u"mjölkfri": [
-                    Ingredient(name=u"Hollandaise, mjölkfri", quantity=50 * units.grams)
-                    ],
-                }),
-    Dish(name=u"2 x Indisk curry", ingredients=[
-                Ingredient(name=u"Kidneybönor, avrunnen vikt",  quantity=1.4 * 500/255 * units.kilograms),
-                Ingredient(name=u"Lök, gul",             quantity=20 * units.count),
-                Ingredient(name=u"Tomater",              quantity=(10+10) * units.count),
-                Ingredient(name=u"Chili, grön",          quantity=10 * units.count),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=10 * units.count),
-                Ingredient(name=u"Olja, raps",           quantity=(4+6) * units.deciliters),
-                Ingredient(name=u"Gurkmeja",             quantity=None),
-                Ingredient(name=u"Ingefära, färsk",      quantity=200 * units.grams),
-                Ingredient(name=u"Koriander, färsk",     quantity=4 * units.count),
-                Ingredient(name=u"Kikärtor, avrunnen vikt",     quantity=1.2 * 500/255 * units.kilograms),
-                Ingredient(name=u"Spiskummin",           quantity=None),
-                Ingredient(name=u"Chilipulver, röd",     quantity=None),
-                Ingredient(name=u"Koriander, malen",     quantity=None),
-                Ingredient(name=u"Citroner",             quantity=3 * units.count),
-                Ingredient(name=u"Ris, basmati",         quantity=6 * units.liters),
-                ], variants={
-                u"vegetarian": [],
-                u"laktosfri": [],
-                }),
-    Dish(name=u"Porterstek", ingredients=[
-                Ingredient(name=u"Högrev, benfri",       quantity=10 * units.kilograms),
-                Ingredient(name=u"Porter",               quantity=10 * 33 * units.centiliters),
-                Ingredient(name=u"Vinbärsaft, outspädd, bra (typ Önos)", quantity=.5 * units.liters),
-                Ingredient(name=u"Soya, kinesisk",       quantity=3 * units.liters),
-                Ingredient(name=u"Timjan",               quantity=None),
-                Ingredient(name=u"Enbär, torkade",       quantity=8 * units.grams),
-                Ingredient(name=u"Peppar, svart, hel",   quantity=None),
-                Ingredient(name=u"Buljongtärning, kött", quantity=25 * units.count),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=20 * units.count),
-                Ingredient(name=u"Lök, gul",             quantity=10 * units.count),
-                Ingredient(name=u"Vetemjöl",             quantity=3.75 * units.deciliters),
-                Ingredient(name=u"Grädde",               quantity=1 * units.liters),
-                Ingredient(name=u"Potatis",              quantity=16 * units.kilograms),
-                Ingredient(name=u"Salladshuvud",         quantity=6 * units.count),
-                Ingredient(name=u"Gurka",                quantity=5 * units.count),
-                Ingredient(name=u"Tomater",              quantity=10 * units.count),
-                ], variants={
-                u"laktosfri": [
-                    Ingredient(name=u"Grädde, laktosfri", quantity=1 * units.deciliters)
-                    ],
-                u"mjölkfri": [
-                    Ingredient(name=u"Grädde, mjölkfri", quantity=1 * units.deciliters)
-                    ],
-                "vegetarian": [
-                    Ingredient(name=u"Quornfiléer", quantity=2*units.count),
-                    Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count),
-                    ],
-                u"glutenfri": [
-                    Ingredient(name=u"Maizena, ej ljus/mörk", quantity=None)
-                ]
-                }),
-    Dish(name=u"Kassler med potatissallad", ingredients=[
-                Ingredient(name=u"Potatis",              quantity=13 * units.kilograms),
-                Ingredient(name=u"Lök, röd",             quantity=13 * units.count),
-                Ingredient(name=u"Rädisor, knippe",      quantity=13 * units.count),
-                Ingredient(name=u"Salt",                 quantity=None),
-                Ingredient(name=u"Kassler",              quantity=5 * units.kilograms),
-                Ingredient(name=u"Vinäger, vitvins",     quantity=2 * units.deciliters),
-                Ingredient(name=u"Olja, raps",           quantity=4 * units.deciliters),
-                Ingredient(name=u"Fransk senap",         quantity=7 * units.tablespoons),
-                Ingredient(name=u"Peppar, svart",        quantity=None),
-                ], variants={
-                u"vegetarian": [
-                    Ingredient(name=u"Quornburgare", quantity=2 * units.count)
-                    ],
-                u"laktosfri": [],
-                }),
-    Dish(name=u"Sill och potatis", ingredients=[
-                Ingredient(name=u"Sill, burk, blandat",  quantity=10 * units.count),
-                Ingredient(name=u"Potatis",              quantity=16 * units.kilograms),
-                Ingredient(name=u"Knäckebröd, skivor",   quantity=60 * units.count),
-                Ingredient(name=u"Lök, röd",             quantity=5 * units.count),
-                Ingredient(name=u"Gräddfil",             quantity=3 * units.liters),                
-                ], variants={
-                "laktosfri": [
-                    Ingredient(name=u"Gräddfil, laktosfri", quantity=.5 * units.deciliters)
-                    ],
-                u"vegan": [
-                    Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
-                ],
-                u"vegetarian": [],
-                }),
-    Dish(name=u"Brunch", ingredients=[
-                Ingredient(name=u"Bacon",                quantity=12*125 * units.grams),                
-                Ingredient(name=u"Prinskorvar",          quantity=60 * units.count),                
-                Ingredient(name=u"Ägg",                  quantity=90 * units.count),                
-                Ingredient(name=u"Köttbullar",           quantity=2 * units.kilograms),            
-                Ingredient(name=u"Tomater",              quantity=30 * units.count),
-                Ingredient(name=u"Mjölk",                quantity=1 * units.liter),
-                Ingredient(name=u"Grädde",               quantity=1 * units.liter),
-                Ingredient(name=u"Riktigt jävla smör",               quantity=340 * units.grams),
-                ], variants={
-                u"laktosfri": [
-                    Ingredient(name=u"Grädde, laktosfri", quantity=0.2 * units.deciliters)
-                    ],
-                u"vegan": [
-                    Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
-                ],
-                u"vegetarian": [
-                    Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),                
-                ],
-                }),                
-    Dish(name=u"Gulasch", ingredients=[
-                Ingredient(name=u"Grytkött",             quantity=5 * units.kilograms),
-                Ingredient(name=u"Kolbasz",              quantity=1 * units.kilograms),
-                Ingredient(name=u"Lök, gul",             quantity=2.2 * units.kilograms),
-                Ingredient(name=u"Buljongtärning, kött", quantity=20 * units.count),
-                Ingredient(name=u"Tomatpuré",            quantity=3.5*units.deciliters),
-                Ingredient(name=u"Paprikapulver",        quantity=None),
-                Ingredient(name=u"Potatis",              quantity=4.5 * units.kilograms),
-                Ingredient(name=u"Paprika, röd",         quantity=1.4 * units.kilograms),
-                Ingredient(name=u"Salt",                 quantity=None),
-                Ingredient(name=u"Vitlöksklyftor",       quantity=10 * units.count),
-                Ingredient(name=u"Olja, raps",           quantity=1.6 * units.deciliters),
-                Ingredient(name=u"Bröd, ljust, skivor",  quantity=40 * units.count),                
-                ], variants={
-                "vegetarian": [
-                    Ingredient(name=u"Sojakorvar, Hälsans kök", quantity=4 * units.count),
-                    Ingredient(name=u"Buljongtärning, grönsak", quantity=.5*units.count),
-                    ],
-                "laktosfri" : []
-                }),
-    Dish(name=u"Pytt-i-panna", ingredients=[
-                Ingredient(name=u"Rödbetor till pytt-i-panna, portioner", quantity=40 * units.count),
-                Ingredient(name=u"Pytt i panna, portioner", quantity=40 * units.count),
-                ], variants={
-                "vegetarian": [
-                    Ingredient(name=u"Pytt i panna, vegetarisk, portioner", quantity=1 * units.count),
-                    ],
+            },
+        ),
+        Dish(
+            name="Fisksoppa",
+            ingredients=[
+                Ingredient(name="Fisk (kolja, sej)", quantity=5.5 * units.kilograms),
+                Ingredient(name="Potatis", quantity=3 * units.kilograms),
+                Ingredient(name="Morötter", quantity=2 * units.kilograms),
+                Ingredient(name="Palsternacka", quantity=1.2 * units.kilograms),
+                Ingredient(name="Buljongtärning, fisk", quantity=24 * units.count),
+                Ingredient(name="Socker", quantity=1.5 * units.deciliters),
+                Ingredient(name="Purjolök", quantity=2 * units.kilograms),
+                Ingredient(name="Vetemjöl", quantity=2.5 * units.deciliters),
+                Ingredient(name="Persilja, färsk", quantity=2 * units.count),
+                Ingredient(name="Curry", quantity=0.5 * units.deciliters),
+                Ingredient(name="Salt, grov", quantity=None),
+                Ingredient(name="Peppar, svart", quantity=None),
+                Ingredient(name="Creme Fraiche", quantity=2 * units.liters),
+            ],
+            variants={
                 "vegan": [
-                    Ingredient(name=u"Pytt i panna, vegetarisk, portioner", quantity=1 * units.count),
-                    ],
-                "laktosfri" : []
-                }),
-    Dish(name=u"Chili", ingredients=[
-                Ingredient(name=u"Ris, parboiled",          quantity=6 * units.liters),
-                ], variants={
-                "hannah": [ 
-                    Ingredient(name=u"Färdigrätt, åt Hannah H E", quantity=1 * units.count) 
-                    ],
-                u"vegetarian" : [], # blandar inte i kött i en andel
-                u"vegan" : [],      # blandar inte i kött i en andel
-                u"laktosfri" : []   
-                }),
-    Dish(name=u"Extras", ingredients=[
-                Ingredient(name=u"Ketchup", quantity=2 * units.count),
-                Ingredient(name=u"Brödbakningsmix", quantity=2 * units.count),
-                Ingredient(name=u"Diskmedel, flaska", quantity=1 * units.count),
-                Ingredient(name=u"Hushållspapper, rullar", quantity=4 * units.count),
-                Ingredient(name=u"Kaffe", quantity=10 * units.kilogram),
-                Ingredient(name=u"Kaffefilter 1X4", quantity=40 * units.count),
-                Ingredient(name=u"Plastfilm, typ gladpack", quantity=1 * units.count),
-                Ingredient(name=u"Plastpåsar, 3L, paket", quantity=1 * units.count),
-                Ingredient(name=u"Rotsaksborste", quantity=1 * units.count),
-                Ingredient(name=u"Soppåsar mindre, rullar", quantity=2 * units.count),
-                Ingredient(name=u"Sopsäckar, stora, rullar", quantity=5 * units.count),
-                Ingredient(name=u"Riktigt jävla smör", quantity=2*units.kilogram),
-                Ingredient(name=u"Grädde", quantity=1*units.liter),
-                Ingredient(name=u"Havregryn (bara)", quantity=3*units.kilogram),
-                Ingredient(name=u"Sirap, ljus", quantity=750*units.gram),
-                Ingredient(name=u"Vetemjöl", quantity=2*units.kilogram),
-    ]),
-    Dish(name=u"Frukost/fika", ingredients=[
-                Ingredient(name=u"Jordgubbssylt", quantity=2*units.kilogram),
-                Ingredient(name=u"Josextrakt, äpple (måttet är för färdigblandad jos)", quantity=27*units.liter),
-                Ingredient(name=u"Josextrakt, apelsin (måttet är för färdigblandad jos)", quantity=27*units.liter),
-                Ingredient(name=u"Marmelad", quantity=3*units.kilogram),
-                Ingredient(name=u"Russin", quantity=1.5*units.kilogram),
-                Ingredient(name=u"Äppelmos", quantity=6*units.kilogram),
-                Ingredient(name=u"Frukt, blandad prisvärd", quantity=32.5*units.kilogram),
-                Ingredient(name=u"Gurka", quantity=2*units.kilogram),
-                Ingredient(name=u"Paprika, valfri", quantity=2*units.kilogram),
-                Ingredient(name=u"Tomater", quantity=2*units.kilogram),
-                Ingredient(name=u"Kanel", quantity=None),
-                Ingredient(name=u"Bregott", quantity=4.2*units.kilogram),
-                Ingredient(name=u"Filmjölk", quantity=16*units.liter),
-                Ingredient(name=u"Korvpålägg, skivor", quantity=150*units.count),
-                Ingredient(name=u"Köttpålägg, skivor", quantity=250*units.count),
-                Ingredient(name=u"Mjölk", quantity=22*units.liter),
-                Ingredient(name=u"Cornflakes", quantity=2*units.kilogram),
-                Ingredient(name=u"Digestivekex", quantity=350*units.count),
-                Ingredient(name=u"Havregryn (bara)", quantity=5*1.5*units.kilogram),
-                Ingredient(name=u"Kakmix, chokladkaka", quantity=4*units.count),
-                Ingredient(name=u"Knäckebröd, skivor", quantity=2*units.kilogram),
-                Ingredient(name=u"Ljust bröd (typ polar), skivor", quantity=9*40*units.count),
-                Ingredient(name=u"Mörkt bröd, skivor", quantity=7*40*units.count),
-                Ingredient(name=u"Mariekex", quantity=600*units.count),
-                Ingredient(name=u"Müsli", quantity=4*units.kilogram),
-                Ingredient(name=u"Skorpor", quantity=6*units.kilogram),
-                Ingredient(name=u"Tepåsar", quantity=150*units.count),
-                Ingredient(name=u"Ost mild", quantity=3*units.kilogram),
-                Ingredient(name=u"Ost med smak", quantity=5.3*units.kilogram),
-    ],variants={
-                "glutenfri": [
-                    Ingredient(name=u"Knäckebröd, glutenfritt, skivor", quantity=20 * units.count),
-                    ],
+                    Ingredient(
+                        name="Vegetarisk ärtsoppa burk", quantity=1 * units.count
+                    )
+                ],
                 "laktosfri": [
-                    Ingredient(name=u"Mjölk, laktosfri", quantity=1*units.liter),
-                    Ingredient(name=u"Filmjölk, laktosfri", quantity=1*units.liter),
-                    Ingredient(name=u"Yoghurt, laktosfri", quantity=1*units.liter),
-                              ],
-                u"mjölkfri": [
-                    Ingredient(name=u"Sojamjölk", quantity=1*units.liter),
-                              ],                    
-                }),
-])
+                    Ingredient(
+                        name="Gräddfil, laktosfri", quantity=1 * units.deciliters
+                    )
+                ],
+                "vegetarian": [],
+            },
+        ),
+        Dish(
+            name="Lax",
+            ingredients=[
+                Ingredient(name="Salt, grov", quantity=None),
+                Ingredient(name="Majonäs, burk", quantity=2 * units.count),
+                Ingredient(name="Persilja, fryst", quantity=1 * units.count),
+                Ingredient(name="Peppar, svart", quantity=None),
+                Ingredient(name="Timjan", quantity=None),
+                Ingredient(name="Potatis", quantity=16 * units.kilograms),
+                Ingredient(name="Dill, färsk, planta/motsv", quantity=4 * units.count),
+                Ingredient(name="Gräddfil", quantity=3 * units.liters),
+                Ingredient(name="Lax", quantity=150 * 1.10 * 36 * units.gram),
+            ],
+            variants={
+                "vegan": [
+                    Ingredient(
+                        name="Vegetarisk ärtsoppa burk", quantity=1 * units.count
+                    )
+                ],
+                "laktosfri": [
+                    Ingredient(
+                        name="Gräddfil, laktosfri", quantity=1 * units.deciliters
+                    )
+                ],
+                "mjölkfri": [
+                    Ingredient(name="Hollandaise, mjölkfri", quantity=50 * units.grams)
+                ],
+            },
+        ),
+        Dish(
+            name="2 x Indisk curry",
+            ingredients=[
+                Ingredient(
+                    name="Kidneybönor, avrunnen vikt",
+                    quantity=1.4 * 500 / 255 * units.kilograms,
+                ),
+                Ingredient(name="Lök, gul", quantity=20 * units.count),
+                Ingredient(name="Tomater", quantity=(10 + 10) * units.count),
+                Ingredient(name="Chili, grön", quantity=10 * units.count),
+                Ingredient(name="Vitlöksklyftor", quantity=10 * units.count),
+                Ingredient(name="Olja, raps", quantity=(4 + 6) * units.deciliters),
+                Ingredient(name="Gurkmeja", quantity=None),
+                Ingredient(name="Ingefära, färsk", quantity=200 * units.grams),
+                Ingredient(name="Koriander, färsk", quantity=4 * units.count),
+                Ingredient(
+                    name="Kikärtor, avrunnen vikt",
+                    quantity=1.2 * 500 / 255 * units.kilograms,
+                ),
+                Ingredient(name="Spiskummin", quantity=None),
+                Ingredient(name="Chilipulver, röd", quantity=None),
+                Ingredient(name="Koriander, malen", quantity=None),
+                Ingredient(name="Citroner", quantity=3 * units.count),
+                Ingredient(name="Ris, basmati", quantity=6 * units.liters),
+            ],
+            variants={
+                "vegetarian": [],
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Porterstek",
+            ingredients=[
+                Ingredient(name="Högrev, benfri", quantity=10 * units.kilograms),
+                Ingredient(name="Porter", quantity=10 * 33 * units.centiliters),
+                Ingredient(
+                    name="Vinbärsaft, outspädd, bra (typ Önos)",
+                    quantity=0.5 * units.liters,
+                ),
+                Ingredient(name="Soya, kinesisk", quantity=3 * units.liters),
+                Ingredient(name="Timjan", quantity=None),
+                Ingredient(name="Enbär, torkade", quantity=8 * units.grams),
+                Ingredient(name="Peppar, svart, hel", quantity=None),
+                Ingredient(name="Buljongtärning, kött", quantity=25 * units.count),
+                Ingredient(name="Vitlöksklyftor", quantity=20 * units.count),
+                Ingredient(name="Lök, gul", quantity=10 * units.count),
+                Ingredient(name="Vetemjöl", quantity=3.75 * units.deciliters),
+                Ingredient(name="Grädde", quantity=1 * units.liters),
+                Ingredient(name="Potatis", quantity=16 * units.kilograms),
+                Ingredient(name="Salladshuvud", quantity=6 * units.count),
+                Ingredient(name="Gurka", quantity=5 * units.count),
+                Ingredient(name="Tomater", quantity=10 * units.count),
+            ],
+            variants={
+                "laktosfri": [
+                    Ingredient(name="Grädde, laktosfri", quantity=1 * units.deciliters)
+                ],
+                "mjölkfri": [
+                    Ingredient(name="Grädde, mjölkfri", quantity=1 * units.deciliters)
+                ],
+                "vegetarian": [
+                    Ingredient(name="Quornfiléer", quantity=2 * units.count),
+                    Ingredient(
+                        name="Buljongtärning, grönsak", quantity=0.5 * units.count
+                    ),
+                ],
+                "glutenfri": [Ingredient(name="Maizena, ej ljus/mörk", quantity=None)],
+            },
+        ),
+        Dish(
+            name="Kassler med potatissallad",
+            ingredients=[
+                Ingredient(name="Potatis", quantity=13 * units.kilograms),
+                Ingredient(name="Lök, röd", quantity=13 * units.count),
+                Ingredient(name="Rädisor, knippe", quantity=13 * units.count),
+                Ingredient(name="Salt", quantity=None),
+                Ingredient(name="Kassler", quantity=5 * units.kilograms),
+                Ingredient(name="Vinäger, vitvins", quantity=2 * units.deciliters),
+                Ingredient(name="Olja, raps", quantity=4 * units.deciliters),
+                Ingredient(name="Fransk senap", quantity=7 * units.tablespoons),
+                Ingredient(name="Peppar, svart", quantity=None),
+            ],
+            variants={
+                "vegetarian": [
+                    Ingredient(name="Quornburgare", quantity=2 * units.count)
+                ],
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Sill och potatis",
+            ingredients=[
+                Ingredient(name="Sill, burk, blandat", quantity=10 * units.count),
+                Ingredient(name="Potatis", quantity=16 * units.kilograms),
+                Ingredient(name="Knäckebröd, skivor", quantity=60 * units.count),
+                Ingredient(name="Lök, röd", quantity=5 * units.count),
+                Ingredient(name="Gräddfil", quantity=3 * units.liters),
+            ],
+            variants={
+                "laktosfri": [
+                    Ingredient(
+                        name="Gräddfil, laktosfri", quantity=0.5 * units.deciliters
+                    )
+                ],
+                "vegan": [
+                    Ingredient(
+                        name="Sojakorvar, Hälsans kök", quantity=4 * units.count
+                    ),
+                ],
+                "vegetarian": [],
+            },
+        ),
+        Dish(
+            name="Brunch",
+            ingredients=[
+                Ingredient(name="Bacon", quantity=12 * 125 * units.grams),
+                Ingredient(name="Prinskorvar", quantity=60 * units.count),
+                Ingredient(name="Ägg", quantity=90 * units.count),
+                Ingredient(name="Köttbullar", quantity=2 * units.kilograms),
+                Ingredient(name="Tomater", quantity=30 * units.count),
+                Ingredient(name="Mjölk", quantity=1 * units.liter),
+                Ingredient(name="Grädde", quantity=1 * units.liter),
+                Ingredient(name="Riktigt jävla smör", quantity=340 * units.grams),
+            ],
+            variants={
+                "laktosfri": [
+                    Ingredient(
+                        name="Grädde, laktosfri", quantity=0.2 * units.deciliters
+                    )
+                ],
+                "vegan": [
+                    Ingredient(
+                        name="Sojakorvar, Hälsans kök", quantity=4 * units.count
+                    ),
+                ],
+                "vegetarian": [
+                    Ingredient(
+                        name="Sojakorvar, Hälsans kök", quantity=4 * units.count
+                    ),
+                ],
+            },
+        ),
+        Dish(
+            name="Gulasch",
+            ingredients=[
+                Ingredient(name="Grytkött", quantity=5 * units.kilograms),
+                Ingredient(name="Kolbasz", quantity=1 * units.kilograms),
+                Ingredient(name="Lök, gul", quantity=2.2 * units.kilograms),
+                Ingredient(name="Buljongtärning, kött", quantity=20 * units.count),
+                Ingredient(name="Tomatpuré", quantity=3.5 * units.deciliters),
+                Ingredient(name="Paprikapulver", quantity=None),
+                Ingredient(name="Potatis", quantity=4.5 * units.kilograms),
+                Ingredient(name="Paprika, röd", quantity=1.4 * units.kilograms),
+                Ingredient(name="Salt", quantity=None),
+                Ingredient(name="Vitlöksklyftor", quantity=10 * units.count),
+                Ingredient(name="Olja, raps", quantity=1.6 * units.deciliters),
+                Ingredient(name="Bröd, ljust, skivor", quantity=40 * units.count),
+            ],
+            variants={
+                "vegetarian": [
+                    Ingredient(
+                        name="Sojakorvar, Hälsans kök", quantity=4 * units.count
+                    ),
+                    Ingredient(
+                        name="Buljongtärning, grönsak", quantity=0.5 * units.count
+                    ),
+                ],
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Pytt-i-panna",
+            ingredients=[
+                Ingredient(
+                    name="Rödbetor till pytt-i-panna, portioner",
+                    quantity=40 * units.count,
+                ),
+                Ingredient(name="Pytt i panna, portioner", quantity=40 * units.count),
+            ],
+            variants={
+                "vegetarian": [
+                    Ingredient(
+                        name="Pytt i panna, vegetarisk, portioner",
+                        quantity=1 * units.count,
+                    ),
+                ],
+                "vegan": [
+                    Ingredient(
+                        name="Pytt i panna, vegetarisk, portioner",
+                        quantity=1 * units.count,
+                    ),
+                ],
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Chili",
+            ingredients=[
+                Ingredient(name="Ris, parboiled", quantity=6 * units.liters),
+            ],
+            variants={
+                "hannah": [
+                    Ingredient(
+                        name="Färdigrätt, åt Hannah H E", quantity=1 * units.count
+                    )
+                ],
+                "vegetarian": [],  # blandar inte i kött i en andel
+                "vegan": [],  # blandar inte i kött i en andel
+                "laktosfri": [],
+            },
+        ),
+        Dish(
+            name="Extras",
+            ingredients=[
+                Ingredient(name="Ketchup", quantity=2 * units.count),
+                Ingredient(name="Brödbakningsmix", quantity=2 * units.count),
+                Ingredient(name="Diskmedel, flaska", quantity=1 * units.count),
+                Ingredient(name="Hushållspapper, rullar", quantity=4 * units.count),
+                Ingredient(name="Kaffe", quantity=10 * units.kilogram),
+                Ingredient(name="Kaffefilter 1X4", quantity=40 * units.count),
+                Ingredient(name="Plastfilm, typ gladpack", quantity=1 * units.count),
+                Ingredient(name="Plastpåsar, 3L, paket", quantity=1 * units.count),
+                Ingredient(name="Rotsaksborste", quantity=1 * units.count),
+                Ingredient(name="Soppåsar mindre, rullar", quantity=2 * units.count),
+                Ingredient(name="Sopsäckar, stora, rullar", quantity=5 * units.count),
+                Ingredient(name="Riktigt jävla smör", quantity=2 * units.kilogram),
+                Ingredient(name="Grädde", quantity=1 * units.liter),
+                Ingredient(name="Havregryn (bara)", quantity=3 * units.kilogram),
+                Ingredient(name="Sirap, ljus", quantity=750 * units.gram),
+                Ingredient(name="Vetemjöl", quantity=2 * units.kilogram),
+            ],
+        ),
+        Dish(
+            name="Frukost/fika",
+            ingredients=[
+                Ingredient(name="Jordgubbssylt", quantity=2 * units.kilogram),
+                Ingredient(
+                    name="Josextrakt, äpple (måttet är för färdigblandad jos)",
+                    quantity=27 * units.liter,
+                ),
+                Ingredient(
+                    name="Josextrakt, apelsin (måttet är för färdigblandad jos)",
+                    quantity=27 * units.liter,
+                ),
+                Ingredient(name="Marmelad", quantity=3 * units.kilogram),
+                Ingredient(name="Russin", quantity=1.5 * units.kilogram),
+                Ingredient(name="Äppelmos", quantity=6 * units.kilogram),
+                Ingredient(
+                    name="Frukt, blandad prisvärd", quantity=32.5 * units.kilogram
+                ),
+                Ingredient(name="Gurka", quantity=2 * units.kilogram),
+                Ingredient(name="Paprika, valfri", quantity=2 * units.kilogram),
+                Ingredient(name="Tomater", quantity=2 * units.kilogram),
+                Ingredient(name="Kanel", quantity=None),
+                Ingredient(name="Bregott", quantity=4.2 * units.kilogram),
+                Ingredient(name="Filmjölk", quantity=16 * units.liter),
+                Ingredient(name="Korvpålägg, skivor", quantity=150 * units.count),
+                Ingredient(name="Köttpålägg, skivor", quantity=250 * units.count),
+                Ingredient(name="Mjölk", quantity=22 * units.liter),
+                Ingredient(name="Cornflakes", quantity=2 * units.kilogram),
+                Ingredient(name="Digestivekex", quantity=350 * units.count),
+                Ingredient(name="Havregryn (bara)", quantity=5 * 1.5 * units.kilogram),
+                Ingredient(name="Kakmix, chokladkaka", quantity=4 * units.count),
+                Ingredient(name="Knäckebröd, skivor", quantity=2 * units.kilogram),
+                Ingredient(
+                    name="Ljust bröd (typ polar), skivor", quantity=9 * 40 * units.count
+                ),
+                Ingredient(name="Mörkt bröd, skivor", quantity=7 * 40 * units.count),
+                Ingredient(name="Mariekex", quantity=600 * units.count),
+                Ingredient(name="Müsli", quantity=4 * units.kilogram),
+                Ingredient(name="Skorpor", quantity=6 * units.kilogram),
+                Ingredient(name="Tepåsar", quantity=150 * units.count),
+                Ingredient(name="Ost mild", quantity=3 * units.kilogram),
+                Ingredient(name="Ost med smak", quantity=5.3 * units.kilogram),
+            ],
+            variants={
+                "glutenfri": [
+                    Ingredient(
+                        name="Knäckebröd, glutenfritt, skivor",
+                        quantity=20 * units.count,
+                    ),
+                ],
+                "laktosfri": [
+                    Ingredient(name="Mjölk, laktosfri", quantity=1 * units.liter),
+                    Ingredient(name="Filmjölk, laktosfri", quantity=1 * units.liter),
+                    Ingredient(name="Yoghurt, laktosfri", quantity=1 * units.liter),
+                ],
+                "mjölkfri": [
+                    Ingredient(name="Sojamjölk", quantity=1 * units.liter),
+                ],
+            },
+        ),
+    ]
+)
 
 # laktosfri
 # mjölkfri
@@ -544,30 +860,63 @@ dishes = NameDict([
 # vegan
 
 menu = [
-    MenuItem(dish=dishes[u"Fänkål och kycklingsallad"], day=u"måndag"),
-    MenuItem(dish=dishes[u"Pasta & köttfärssås"],       day=u"måndag"),
-    MenuItem(dish=dishes[u"Korv stroganoff"],           day=u"tisdag"),
-#    MenuItem(dish=dishes[u"Lax"], day=u"tisdag"),
-    MenuItem(dish=dishes[u"Fisksoppa"],                 day=u"tisdag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"2 x Indisk curry"],          day=u"onsdag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Porterstek"],                day=u"onsdag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Kassler med potatissallad"], day=u"torsdag", variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Kycklinggryta med fetaost"], day=u"torsdag", variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Sill och potatis"],          day=u"fredag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Brunch"],                    day=u"lördag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Gulasch"],                   day=u"lördag",  variants={"laktosfri": 1, "vegetarian": 3}),
-    MenuItem(dish=dishes[u"Pytt-i-panna"],              day=u"söndag",  variants={"laktosfri": 1, "vegetarian": 3}),    
-    MenuItem(dish=dishes[u"Frukost/fika"],              day=None,       variants={"laktosfri": 1, u"mjölkfri": 0, "glutenfri": 1}),
-    MenuItem(dish=dishes[u"Extras"],                    day=None),
-    MenuItem(dish=dishes[u"Chili"],                     day=None,       variants={"laktosfri": 1, "vegetarian": 3 }),
-    ]
+    MenuItem(dish=dishes["Fänkål och kycklingsallad"], day="måndag"),
+    MenuItem(dish=dishes["Pasta & köttfärssås"], day="måndag"),
+    MenuItem(dish=dishes["Korv stroganoff"], day="tisdag"),
+    #    MenuItem(dish=dishes[u"Lax"], day=u"tisdag"),
+    MenuItem(
+        dish=dishes["Fisksoppa"],
+        day="tisdag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["2 x Indisk curry"],
+        day="onsdag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Porterstek"],
+        day="onsdag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Kassler med potatissallad"],
+        day="torsdag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Kycklinggryta med fetaost"],
+        day="torsdag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Sill och potatis"],
+        day="fredag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Brunch"], day="lördag", variants={"laktosfri": 1, "vegetarian": 3}
+    ),
+    MenuItem(
+        dish=dishes["Gulasch"], day="lördag", variants={"laktosfri": 1, "vegetarian": 3}
+    ),
+    MenuItem(
+        dish=dishes["Pytt-i-panna"],
+        day="söndag",
+        variants={"laktosfri": 1, "vegetarian": 3},
+    ),
+    MenuItem(
+        dish=dishes["Frukost/fika"],
+        day=None,
+        variants={"laktosfri": 1, "mjölkfri": 0, "glutenfri": 1},
+    ),
+    MenuItem(dish=dishes["Extras"], day=None),
+    MenuItem(
+        dish=dishes["Chili"], day=None, variants={"laktosfri": 1, "vegetarian": 3}
+    ),
+]
 
-translations = [
-    ("kilogram","kg"),
-    ("count", "st"),
-    ("deciliter", "dl"),
-    ("gram", "g")
-    ]
+translations = [("kilogram", "kg"), ("count", "st"), ("deciliter", "dl"), ("gram", "g")]
 
 # prebought = [
 #                Ingredient(name=u"Korvpålägg, skivor", quantity=50*units.count),
@@ -583,20 +932,20 @@ translations = [
 #                 Ingredient(name=u"Buljongtärning, grönsak", quantity=11*units.count),
 #             ]
 prebought = [
-                Ingredient(name=u"Kycklingfilé",            quantity=5   * units.kilogram),
-                Ingredient(name=u"Fisk (kolja, sej)",       quantity=2.5 * units.kilogram),
-                Ingredient(name=u"Buljongtärning, kött",    quantity=6   * units.count),
-                Ingredient(name=u"Buljongtärning, grönsak", quantity=8   * units.count),
-                Ingredient(name=u"Grädde",                  quantity=9   * units.liters),
-                Ingredient(name=u"Olja, raps",              quantity=9   * units.deciliters),
-#                Ingredient(name=u"Kikärtor, avrunnen vikt",     quantity=1.5 * units.kilograms),
-#                Ingredient(name=u"Kidneybönor, avrunnen vikt",  quantity=1.5 * units.kilograms),
-#                Ingredient(name=u"Fänkål",               quantity=5.4 * units.kilograms),
-#                Ingredient(name=u"Lax",                  quantity=150 * 40 * units.gram),
-#                Ingredient(name=u"Tomatpuré",            quantity=440 * units.grams),
+    Ingredient(name="Kycklingfilé", quantity=5 * units.kilogram),
+    Ingredient(name="Fisk (kolja, sej)", quantity=2.5 * units.kilogram),
+    Ingredient(name="Buljongtärning, kött", quantity=6 * units.count),
+    Ingredient(name="Buljongtärning, grönsak", quantity=8 * units.count),
+    Ingredient(name="Grädde", quantity=9 * units.liters),
+    Ingredient(name="Olja, raps", quantity=9 * units.deciliters),
+    #                Ingredient(name=u"Kikärtor, avrunnen vikt",     quantity=1.5 * units.kilograms),
+    #                Ingredient(name=u"Kidneybönor, avrunnen vikt",  quantity=1.5 * units.kilograms),
+    #                Ingredient(name=u"Fänkål",               quantity=5.4 * units.kilograms),
+    #                Ingredient(name=u"Lax",                  quantity=150 * 40 * units.gram),
+    #                Ingredient(name=u"Tomatpuré",            quantity=440 * units.grams),
 ]
 buy_later = [
-                Ingredient(name=u"Ägg",                  quantity=90 * units.count),    # simply do not buy them before
-                Ingredient(name=u"Mjölk",                quantity=8  * units.liters),
-                Ingredient(name=u"Bröd, ljust, skivor",  quantity=40 * units.count),                
-             ]
+    Ingredient(name="Ägg", quantity=90 * units.count),  # simply do not buy them before
+    Ingredient(name="Mjölk", quantity=8 * units.liters),
+    Ingredient(name="Bröd, ljust, skivor", quantity=40 * units.count),
+]
