@@ -929,10 +929,10 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Tomater", quantity=2 * units.kilogram),
                 Ingredient(name="Kanel", quantity=None),
                 Ingredient(name="Bregott", quantity=4.2 * units.kilogram),
-                Ingredient(name="Filmjölk", quantity=8 * units.liter),
+                Ingredient(name="Filmjölk", quantity=16 * units.liter),
                 Ingredient(name="Korvpålägg, skivor", quantity=150 * units.count),
                 Ingredient(name="Köttpålägg, skivor", quantity=250 * units.count),
-                Ingredient(name="Mjölk", quantity=11 * units.liter),
+                Ingredient(name="Mjölk", quantity=18 * units.liter),
                 Ingredient(name="Cornflakes", quantity=2 * units.kilogram),
                 Ingredient(name="Digestivekex", quantity=350 * units.count),
                 Ingredient(name="Havregryn (bara)", quantity=5 * 1.5 * units.kilogram),
@@ -1064,7 +1064,10 @@ prebought: list[Ingredient] = [
 # Remove this from the list, save for buying later
 buy_later: list[Ingredient] = [
     Ingredient(name="Ägg", quantity=90 * units.count),  # simply do not buy them before
-    Ingredient(name="Mjölk", quantity=17 * units.liters),
+    Ingredient(name="Mjölk", quantity=14 * units.liters),
     Ingredient(name="Bröd, ljust, skivor", quantity=40 * units.count),
     Ingredient(name="Filmjölk", quantity=8 * units.liter),
+    Ingredient(
+        name="Frukt, blandad prisvärd", quantity=16.5 * units.kilogram
+    ),
 ]
