@@ -13,7 +13,7 @@ class IngredientType:
     conversions: list[Quantity] = field(default_factory=list)
 
 
-@dataclass(kw_only=True, order=True)
+@dataclass(kw_only=True, order=True, frozen=True)
 class Ingredient:
     name: str
     quantity: Optional[Quantity]
