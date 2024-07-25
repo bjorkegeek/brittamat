@@ -750,7 +750,6 @@ dishes: NameDict[Dish] = NameDict(
                         name="Sojakorvar, Hälsans kök", quantity=4 * units.count
                     ),
                 ],
-                "vegetarian": [],
             },
         ),
         Dish(
