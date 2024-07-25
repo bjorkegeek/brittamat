@@ -456,6 +456,7 @@ ingredient_types: NameDict[IngredientType] = NameDict(
         IngredientType(
             name="Kikärtor, okokta", purchase_unit=units.kilogram, category="torr"
         ),
+        IngredientType(name="Sriracha", purchase_unit=None, category="burk"),
     ]
 )
 
@@ -867,6 +868,7 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Peppar, svart", quantity=None),
                 Ingredient(name="Olja, raps", quantity=1.6 * units.deciliters),
                 Ingredient(name="Ris, fullkorn", quantity=5 * units.kilograms),
+                Ingredient(name="Sriracha", quantity=None),
             ],
         ),
         Dish(
@@ -1007,7 +1009,7 @@ menu: list[MenuItem] = [
     MenuItem(
         dish=dishes["Sill och potatis"],
         day="fredag",
-        variants={"laktosfri": 1, "vegetarian": 2},
+        variants={"laktosfri": 1},
     ),
     MenuItem(dish=dishes["Fest"], day="fredag"),
     MenuItem(
