@@ -169,6 +169,9 @@ ingredient_types: NameDict[IngredientType] = NameDict(
         IngredientType(
             name="Fetaost", purchase_unit=units.kilograms, category="mejeri"
         ),
+        IngredientType(
+            name="Fetaost, laktosfri", purchase_unit=units.kilograms, category="mejeri"
+        ),
         IngredientType(name="Mjölk", purchase_unit=units.liters, category="mejeri"),
         IngredientType(name="Gräddfil", purchase_unit=units.liters, category="mejeri"),
         IngredientType(
@@ -535,7 +538,9 @@ dishes: NameDict[Dish] = NameDict(
                     )
                 ],
                 "mjölkfri": [],
-                "laktosfri": [],
+                "laktosfri": [
+                    Ingredient(name="Fetaost, laktosfri", quantity=45 * units.gram)
+                ],
             },
         ),
         Dish(
@@ -637,6 +642,7 @@ dishes: NameDict[Dish] = NameDict(
                     )
                 ],
                 "vegetarian": [],
+                "glutenfri": [Ingredient(name="Maizena, ej ljus/mörk", quantity=None)],
             },
         ),
         Dish(
