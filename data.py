@@ -261,7 +261,9 @@ ingredient_types: NameDict[IngredientType] = NameDict(
         ),
         IngredientType(name="Paprikapulver", purchase_unit=None, category="krydd"),
         IngredientType(
-            name="Bröd, ljust, skivor", purchase_unit=units.count, category="torr"
+            name="Bröd, ljust (typ polar och annat), skivor",
+            purchase_unit=units.count,
+            category="torr",
         ),
         IngredientType(name="Grytkött", purchase_unit=units.kilogram, category="kyl"),
         IngredientType(name="Kolbasz", purchase_unit=units.kilogram, category="kyl"),
@@ -376,7 +378,7 @@ ingredient_types: NameDict[IngredientType] = NameDict(
         IngredientType(name="Marmelad", purchase_unit=units.kilogram, category="burk"),
         IngredientType(name="Russin", purchase_unit=units.kilogram, category="torr"),
         IngredientType(
-            name="Ljust bröd (typ polar), skivor",
+            name="Bröd, ljust (typ polar och annat), skivor",
             purchase_unit=units.count,
             category="torr",
         ),
@@ -658,7 +660,7 @@ dishes: NameDict[Dish] = NameDict(
                 ),
                 Ingredient(name="Grovkornig senap", quantity=40 * 25 * units.grams),
                 Ingredient(
-                    name="Ljust bröd (typ polar), skivor",
+                    name="Bröd, ljust (typ polar och annat), skivor",
                     quantity=40 * 1.5 * units.count,
                 ),
             ],
@@ -855,7 +857,8 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Vitlöksklyftor", quantity=10 * units.count),
                 Ingredient(name="Olja, raps", quantity=1.6 * units.deciliters),
                 Ingredient(
-                    name="Ljust bröd (typ polar), skivor", quantity=40 * units.count
+                    name="Bröd, ljust (typ polar och annat), skivor",
+                    quantity=40 * units.count,
                 ),
             ],
             variants={
@@ -1002,7 +1005,8 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Havregryn (bara)", quantity=5 * 1.5 * units.kilogram),
                 Ingredient(name="Knäckebröd, skivor", quantity=2 * units.kilogram),
                 Ingredient(
-                    name="Ljust bröd (typ polar), skivor", quantity=9 * 40 * units.count
+                    name="Bröd, ljust (typ polar och annat), skivor",
+                    quantity=9 * 40 * units.count,
                 ),
                 Ingredient(name="Mörkt bröd, skivor", quantity=7 * 40 * units.count),
                 Ingredient(name="Mariekex", quantity=600 * units.count),
@@ -1146,7 +1150,9 @@ prebought: list[Ingredient] = [
 buy_later: list[Ingredient] = [
     Ingredient(name="Ägg", quantity=90 * units.count),  # simply do not buy them before
     Ingredient(name="Mjölk", quantity=14 * units.liters),
-    Ingredient(name="Bröd, ljust, skivor", quantity=80 * units.count),
+    Ingredient(
+        name="Bröd, ljust (typ polar och annat), skivor", quantity=80 * units.count
+    ),
     Ingredient(name="Filmjölk", quantity=8 * units.liter),
     Ingredient(name="Frukt, blandad prisvärd", quantity=16.5 * units.kilogram),
 ]
