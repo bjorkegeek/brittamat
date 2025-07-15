@@ -646,7 +646,7 @@ dishes: NameDict[Dish] = NameDict(
                     name="Ärtsoppa på burk, portioner", quantity=40 * units.count
                 ),
                 Ingredient(name="Grovkornig senap", quantity=40 * 25 * units.grams),
-                Ingredient(name="Bröd, ljust, skivor", quantity=40 * 2 * units.count),
+                Ingredient(name="Bröd, ljust, skivor", quantity=40 * 1.5 * units.count),
             ],
             variants={
                 "vegetarian": [
