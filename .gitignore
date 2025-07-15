@@ -2,3 +2,5 @@
 *.log
 *.pdf
 *.tex
+*.pyc
+.DS_Store

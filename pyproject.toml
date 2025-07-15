@@ -1,0 +1,16 @@
+[project]
+name = "brittamat"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "babel==2.15.0",
+    "pint>=0.24.4",
+]
+
+[dependency-groups]
+dev = [
+    "black==24.4.2",
+    "mypy==1.10.1",
+    "mypy-extensions==1.0.0",
+]
