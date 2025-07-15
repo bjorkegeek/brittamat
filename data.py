@@ -506,7 +506,12 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Peppar, svart", quantity=None),
             ],
             variants={
-                "vegetarian": [Ingredient(name="Quornfiléer", quantity=1 * units.count)]
+                "vegetarian": [
+                    Ingredient(name="Quornfiléer", quantity=1 * units.count)
+                ],
+                "laktosfri": [
+                    Ingredient(name="Fetaost, laktosfri", quantity=55 * units.gram)
+                ],
             },
         ),
         Dish(
@@ -652,7 +657,10 @@ dishes: NameDict[Dish] = NameDict(
                     name="Ärtsoppa på burk, portioner", quantity=40 * units.count
                 ),
                 Ingredient(name="Grovkornig senap", quantity=40 * 25 * units.grams),
-                Ingredient(name="Bröd, ljust, skivor", quantity=40 * 1.5 * units.count),
+                Ingredient(
+                    name="Ljust bröd (typ polar), skivor",
+                    quantity=40 * 1.5 * units.count,
+                ),
             ],
             variants={
                 "vegetarian": [
@@ -846,7 +854,9 @@ dishes: NameDict[Dish] = NameDict(
                 Ingredient(name="Salt", quantity=None),
                 Ingredient(name="Vitlöksklyftor", quantity=10 * units.count),
                 Ingredient(name="Olja, raps", quantity=1.6 * units.deciliters),
-                Ingredient(name="Bröd, ljust, skivor", quantity=40 * units.count),
+                Ingredient(
+                    name="Ljust bröd (typ polar), skivor", quantity=40 * units.count
+                ),
             ],
             variants={
                 "vegetarian": [
@@ -1136,7 +1146,7 @@ prebought: list[Ingredient] = [
 buy_later: list[Ingredient] = [
     Ingredient(name="Ägg", quantity=90 * units.count),  # simply do not buy them before
     Ingredient(name="Mjölk", quantity=14 * units.liters),
-    Ingredient(name="Bröd, ljust, skivor", quantity=40 * units.count),
+    Ingredient(name="Bröd, ljust, skivor", quantity=80 * units.count),
     Ingredient(name="Filmjölk", quantity=8 * units.liter),
     Ingredient(name="Frukt, blandad prisvärd", quantity=16.5 * units.kilogram),
 ]
