@@ -273,7 +273,7 @@ ingredient_types: NameDict[IngredientType] = NameDict(
             category="burk",
         ),
         IngredientType(
-            name="Ärtsoppa på burk, portioner",
+            name="Ärtsoppa på burk, portioner (400g/pp)",
             purchase_unit=units.count,
             category="burk",
         ),
@@ -656,7 +656,8 @@ dishes: NameDict[Dish] = NameDict(
             name="Ärtsoppa",
             ingredients=[
                 Ingredient(
-                    name="Ärtsoppa på burk, portioner", quantity=40 * units.count
+                    name="Ärtsoppa på burk, portioner (400g/pp)",
+                    quantity=40 * units.count,
                 ),
                 Ingredient(name="Grovkornig senap", quantity=40 * 25 * units.grams),
                 Ingredient(
@@ -1133,12 +1134,16 @@ translations = [("kilogram", "kg"), ("count", "st"), ("deciliter", "dl"), ("gram
 
 # Remove this from the list, already bought!
 prebought: list[Ingredient] = [
-    # Ingredient(name="Kycklingfilé", quantity=5 * units.kilogram),
+    Ingredient(name="Ärtsoppa på burk, portioner (400g/pp)", quantity=40 * units.count),
+    Ingredient(name="Kycklingfilé", quantity=5 * units.kilogram),
+    Ingredient(name="Fetaost", quantity=2.2 * units.kilograms),
+    Ingredient(name="Soya, kinesisk", quantity=4 * units.deciliters),
     # Ingredient(name="Fisk (kolja, sej)", quantity=2.5 * units.kilogram),
-    # Ingredient(name="Buljongtärning, kött", quantity=6 * units.count),
+    Ingredient(name="Buljongtärning, kött", quantity=(66 - 12) * units.count),
     # Ingredient(name="Buljongtärning, grönsak", quantity=8 * units.count),
     # Ingredient(name="Grädde", quantity=9 * units.liters),
-    # Ingredient(name="Olja, raps", quantity=9 * units.deciliters),
+    Ingredient(name="Olja, raps", quantity=4 * units.deciliters),
+    Ingredient(name="Lök, gul", quantity=800 * units.grams),
     #                Ingredient(name=u"Kikärtor, avrunnen vikt",     quantity=1.5 * units.kilograms),
     #                Ingredient(name=u"Kidneybönor, avrunnen vikt",  quantity=1.5 * units.kilograms),
     #                Ingredient(name=u"Fänkål",               quantity=5.4 * units.kilograms),
